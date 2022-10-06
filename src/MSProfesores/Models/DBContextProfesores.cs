@@ -1,0 +1,41 @@
+﻿using System;
+using System.Numerics;
+using Microsoft.EntityFrameworkCore;
+
+namespace MSProfesores.Models
+{
+	public partial class DBContextProfesores : DbContext
+	{
+		public DBContextProfesores()
+		{
+		}
+
+        public DBContextProfesores(DbContextOptions<DBContextProfesores> options)
+            : base(options)
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+        }
+
+        public virtual DbSet<Profesor> Profesores { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Profesor>(entity =>
+            {
+                entity.HasKey(e => e.CI)
+                    .HasName("PK_CI");
+
+                entity.ToTable("Profesores");
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    }
+}
+
