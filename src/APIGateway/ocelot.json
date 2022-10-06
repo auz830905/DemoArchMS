@@ -1,14 +1,14 @@
 {
   "Aggregates": [
     {
-      "UpstreamPathTemplate": "/api/usersPosts",
-      "RouteKeys": [ "users", "posts" ],
-      "Aggregator": "UserPostAggregator"
+      "UpstreamPathTemplate": "/ClasesImpartidasPorUnProfesor/{Ci}",
+      "RouteKeys": [ "get_clase_by_profesor", "get_profesor_by_id" ],
+      "Aggregator": "ClasesImpartidasPorUnProfesorAggregator"
     }
   ],
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/users/{id}",
+      "DownstreamPathTemplate": "/GetClasesById/{Id}",
       "UpstreamHttpMethod": [],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -17,17 +17,17 @@
           "Port": 44381
         }
       ],
-      "UpstreamPathTemplate": "/api/users/{id}",
-      "Key": "users_by_id",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "UserType": "admin"
-      }
+      "UpstreamPathTemplate": "/GetClasesById/{Id}",
+      "Key": "clases_by_id" //,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer"
+      //},
+      //"RouteClaimsRequirement": {
+      //  "UserType": "admin"
+      //}
     },
     {
-      "DownstreamPathTemplate": "/api/users",
+      "DownstreamPathTemplate": "/GetClases",
       "UpstreamHttpMethod": [],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -36,17 +36,11 @@
           "Port": 44381
         }
       ],
-      "UpstreamPathTemplate": "/api/users",
-      "Key": "users",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "UserType": "admin"
-      }
+      "UpstreamPathTemplate": "/GetClases",
+      "Key": "clases"
     },
     {
-      "DownstreamPathTemplate": "/api/posts",
+      "DownstreamPathTemplate": "/PostClase",
       "UpstreamHttpMethod": [],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -55,14 +49,11 @@
           "Port": 44389
         }
       ],
-      "UpstreamPathTemplate": "/api/posts",
-      "Key": "posts",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamPathTemplate": "/PostClase",
+      "Key": "post_clase"
     },
     {
-      "DownstreamPathTemplate": "/api/posts/{id}",
+      "DownstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
       "UpstreamHttpMethod": [],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -71,14 +62,11 @@
           "Port": 44389
         }
       ],
-      "UpstreamPathTemplate": "/api/posts/{id}",
-      "Key": "posts_by_id",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
+      "Key": "get_clase_by_profesor"
     },
     {
-      "DownstreamPathTemplate": "/api/posts/{idUser}/user",
+      "DownstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
       "UpstreamHttpMethod": [],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -87,12 +75,49 @@
           "Port": 44389
         }
       ],
-      "UpstreamPathTemplate": "/api/posts/{idUser}/user",
-      "Key": "posts_by_id_user",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
+      "UpstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
+      "Key": "post_clase_profesor"
+    },
+    {
+      "DownstreamPathTemplate": "/GetProfesorByCI/{Ci}",
+      "UpstreamHttpMethod": [],
+      "DownstreamSCheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44389
+        }
+      ],
+      "UpstreamPathTemplate": "/GetProfesorByCI/{Ci}",
+      "Key": "get_profesor_by_id"
+    },
+    {
+      "DownstreamPathTemplate": "/GetProfesores",
+      "UpstreamHttpMethod": [],
+      "DownstreamSCheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44389
+        }
+      ],
+      "UpstreamPathTemplate": "/GetProfesores",
+      "Key": "get_profesores"
+    },
+    {
+      "DownstreamPathTemplate": "/PostProfesor",
+      "UpstreamHttpMethod": [],
+      "DownstreamSCheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44389
+        }
+      ],
+      "UpstreamPathTemplate": "/PostProfesor",
+      "Key": "post_profesor"
     }
+
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:44353"

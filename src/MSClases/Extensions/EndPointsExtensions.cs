@@ -28,7 +28,7 @@ namespace MSClases.Extensions
 
                 return Results.NoContent();
             })
-            .WithName("GetProfesores");
+            .WithName("GetClases");
 
             app.MapPost("/PostClase", async (IClasesRepository repository, Clase clase) =>
             {

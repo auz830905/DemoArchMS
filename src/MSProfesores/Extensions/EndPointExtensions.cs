@@ -8,9 +8,9 @@ namespace MSProfesores.Extensions
 	{
 		internal static void AddEndPointsProfesoresExtension(this WebApplication app)
 		{
-            app.MapGet("/GetProfesorByCI/{ci}", async (IProfesoresRepository repository, string ci) =>
+            app.MapGet("/GetProfesorByCI/{ci}", async (IProfesoresRepository repository, string Ci) =>
             {
-                var profesor = await repository.GetProfesor(ci);
+                var profesor = await repository.GetProfesor(Ci);
 
                 if (profesor != null)
                     return Results.Ok(profesor);

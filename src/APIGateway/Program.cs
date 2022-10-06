@@ -1,3 +1,4 @@
+using APIGateway.Agregators;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -10,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOcelot()
-    .AddSingletonDefinedAggregator<UserPostAggregator>();
+    .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();
 
 var app = builder.Build();
 
