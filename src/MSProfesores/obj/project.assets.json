@@ -2332,24 +2332,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/arley/.nuget/packages/": {}
+    "C:\\Users\\Arley\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/MSProfesores/MSProfesores.csproj",
+      "projectUniqueName": "D:\\Otros Proyectos Web en C#\\DemoMicroservicios\\src\\MSProfesores\\MSProfesores.csproj",
       "projectName": "MSProfesores",
-      "projectPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/MSProfesores/MSProfesores.csproj",
-      "packagesPath": "/Users/arley/.nuget/packages/",
-      "outputPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/MSProfesores/obj/",
+      "projectPath": "D:\\Otros Proyectos Web en C#\\DemoMicroservicios\\src\\MSProfesores\\MSProfesores.csproj",
+      "packagesPath": "C:\\Users\\Arley\\.nuget\\packages\\",
+      "outputPath": "D:\\Otros Proyectos Web en C#\\DemoMicroservicios\\src\\MSProfesores\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/arley/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Arley\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2397,8 +2399,7 @@
           "net47",
           "net471",
           "net472",
-          "net48",
-          "net481"
+          "net48"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -2410,7 +2411,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
