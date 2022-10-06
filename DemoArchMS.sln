@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "src\APIGateway\APIGateway.csproj", "{8626C4B6-454C-49BA-BE6E-2D0639144AC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,9 +33,14 @@ Global
 		{30E35E08-7268-450B-835A-1D03C1324CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E35E08-7268-450B-835A-1D03C1324CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E35E08-7268-450B-835A-1D03C1324CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8626C4B6-454C-49BA-BE6E-2D0639144AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8626C4B6-454C-49BA-BE6E-2D0639144AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8626C4B6-454C-49BA-BE6E-2D0639144AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8626C4B6-454C-49BA-BE6E-2D0639144AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 		{30E35E08-7268-450B-835A-1D03C1324CA5} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
+		{8626C4B6-454C-49BA-BE6E-2D0639144AC4} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 	EndGlobalSection
 EndGlobal
