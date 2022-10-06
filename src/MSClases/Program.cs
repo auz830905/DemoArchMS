@@ -1,43 +1,42 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MSClases.Extensions;
+using MSClases.Interfaces;
+using MSClases.Models;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var builder = WebApplication.CreateBuilder(args);
+IConfiguration Configuration = builder.Configuration;
+
+builder.Host.ConfigureLogging(logging => {
+    logging.ClearProviders();
+    logging.AddConsole();
+});
+
+builder.Services.AddControllers();
+builder.Services.AddCors();
+builder.Services.AddSwaggerExtension();
+builder.Services.AddInfraestructure();
+
+/*builder.Services.AddDbContext<DBContextProfesores>(options =>
+{
+    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+              
+});*/
+
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>
+{
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
+});
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+app.ConfigureSwagger();
 app.UseHttpsRedirection();
+app.MapControllers();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.AddEndPointsClasesExtension();
+app.AddEndPointClasesProfesoresExtensions();
 
 app.Run();
-
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

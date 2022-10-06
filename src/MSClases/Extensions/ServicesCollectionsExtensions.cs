@@ -33,6 +33,8 @@ namespace MSClases.Extensions
 
             services.AddScoped<IClasesRepository, ClasesServices>();
 
+            services.AddScoped<IClasesProfesoresRepository, ClasesProfesoresServices>();
+
             #endregion
         }
     }

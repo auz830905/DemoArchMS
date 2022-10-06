@@ -36,35 +36,6 @@ app.ConfigureSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
 
-app.MapGet("/GetProfesorByCI/{ci}", async (IProfesoresRepository repository, string ci) =>
-{
-    var profesor = await repository.GetProfesor(ci);
-
-    if (profesor != null)
-        return Results.Ok(profesor);
-
-    return Results.NotFound();
-})
-.WithName("GetProfesorByCI");
-
-app.MapGet("/GetProfesores", async (IProfesoresRepository repository) =>
-{
-    var profesores = await repository.GetProfesores();
-
-    if (profesores != null)
-        return Results.Ok(profesores);
-
-    return Results.NoContent();
-})
-.WithName("GetProfesores");
-
-app.MapPost("/PostProfesor", async (IProfesoresRepository repository,  Profesor profesor) =>
-{
-    var result = await repository.AddProfesor(profesor);
-    if (result)
-        return Results.NoContent();
-    return Results.Problem(statusCode: 500, title: "Internal error");
-})
-.WithName("PostProfesor");
+app.AddEndPointsProfesoresExtension();
 
 app.Run();
