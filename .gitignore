@@ -1,5 +1,7 @@
 ## Ignore common local directories
 .vscode/
+.vs/
+
 .mysnippets/
 sandbox/
 
