@@ -1,0 +1,134 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/WebApp.csproj": {}
+  },
+  "projects": {
+    "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/Shared.csproj",
+        "projectName": "Shared",
+        "projectPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/Shared.csproj",
+        "packagesPath": "/Users/arley/.nuget/packages/",
+        "outputPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/arley/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/WebApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/WebApp.csproj",
+        "projectName": "WebApp",
+        "projectPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/WebApp.csproj",
+        "packagesPath": "/Users/arley/.nuget/packages/",
+        "outputPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/arley/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/Shared.csproj": {
+                "projectPath": "/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/Shared/Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
