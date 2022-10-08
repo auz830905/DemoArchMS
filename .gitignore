@@ -2,6 +2,12 @@
 .vscode/
 .vs/
 
+.DS_Store
+
+bin/
+obj/
+
+
 .mysnippets/
 sandbox/
 
