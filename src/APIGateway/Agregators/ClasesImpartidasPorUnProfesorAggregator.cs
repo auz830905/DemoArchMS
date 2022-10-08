@@ -18,8 +18,11 @@ namespace APIGateway.Agregators
             var profesor = JsonConvert.DeserializeObject<Profesor>(profesorResponseContext);
 
             if (profesor != null)
-                profesor.Clases.AddRange(clases ?? new List<Clase>());
-            
+            {
+                profesor.Clases = new List<Clase>();
+                profesor.Clases.AddRange(clases);
+            }
+              
             var postsByUserString = JsonConvert.SerializeObject(profesor);
 
             var stringContent = new StringContent(postsByUserString)

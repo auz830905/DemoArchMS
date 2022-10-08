@@ -17,17 +17,11 @@ builder.Services.AddCors();
 builder.Services.AddSwaggerExtension();
 builder.Services.AddInfraestructure();
 
-/*builder.Services.AddDbContext<DBContextProfesores>(options =>
+builder.Services.AddDbContext<DBContextClases>(options =>
 {
-    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL"));
               
-});*/
-
-builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>
-{
-    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 });
-
 
 var app = builder.Build();
 

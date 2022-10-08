@@ -10,11 +10,11 @@
     {
       "DownstreamPathTemplate": "/GetClasesById/{Id}",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44381
+          "Host": "192.168.49.2",
+          "Port": 30203
         }
       ],
       "UpstreamPathTemplate": "/GetClasesById/{Id}",
@@ -29,11 +29,11 @@
     {
       "DownstreamPathTemplate": "/GetClases",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44381
+          "Host": "192.168.49.2",
+          "Port": 30203
         }
       ],
       "UpstreamPathTemplate": "/GetClases",
@@ -42,11 +42,11 @@
     {
       "DownstreamPathTemplate": "/PostClase",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30203
         }
       ],
       "UpstreamPathTemplate": "/PostClase",
@@ -55,11 +55,11 @@
     {
       "DownstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30203
         }
       ],
       "UpstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
@@ -68,11 +68,11 @@
     {
       "DownstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30203
         }
       ],
       "UpstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
@@ -81,11 +81,11 @@
     {
       "DownstreamPathTemplate": "/GetProfesorByCI/{Ci}",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30202
         }
       ],
       "UpstreamPathTemplate": "/GetProfesorByCI/{Ci}",
@@ -94,11 +94,11 @@
     {
       "DownstreamPathTemplate": "/GetProfesores",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30202
         }
       ],
       "UpstreamPathTemplate": "/GetProfesores",
@@ -107,11 +107,11 @@
     {
       "DownstreamPathTemplate": "/PostProfesor",
       "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44389
+          "Host": "192.168.49.2",
+          "Port": 30202
         }
       ],
       "UpstreamPathTemplate": "/PostProfesor",
@@ -120,6 +120,6 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:44353"
+    "BaseUrl": "http://192.168.49.2:30201"
   }
 }

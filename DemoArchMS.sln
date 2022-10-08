@@ -16,6 +16,45 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "src\APIGateway\APIGateway.csproj", "{8626C4B6-454C-49BA-BE6E-2D0639144AC4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevOps", "DevOps", "{A3185F1A-474C-43B1-A3D9-8170B7FCA822}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "b_Secrets", "b_Secrets", "{D2123765-8988-421F-BDFF-4FFE179D820C}"
+	ProjectSection(SolutionItems) = preProject
+		k8s.Secret-db-MySql.yaml = k8s.Secret-db-MySql.yaml
+		k8s.Secret-db-PostgreSQL.yaml = k8s.Secret-db-PostgreSQL.yaml
+		k8s.secret-pgadmin.yaml = k8s.secret-pgadmin.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "e_Services", "e_Services", "{A22E8DE7-7510-4F4D-9D06-41EA8263C37F}"
+	ProjectSection(SolutionItems) = preProject
+		k8s.Service-DbMySql.yaml = k8s.Service-DbMySql.yaml
+		k8s.Service-DbPostgres.yaml = k8s.Service-DbPostgres.yaml
+		k8s.Service-PgAdmin.yaml = k8s.Service-PgAdmin.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "c_Volumes", "c_Volumes", "{B2AD36AF-C105-41FC-B2FC-3089399FAEC8}"
+	ProjectSection(SolutionItems) = preProject
+		k8s.Persistence-volumen-claim-MySql.yaml = k8s.Persistence-volumen-claim-MySql.yaml
+		k8s.Persistence-volumen-claim-PostgreSQL.yaml = k8s.Persistence-volumen-claim-PostgreSQL.yaml
+		k8s.Persistence-volumen-Postgres.yaml = k8s.Persistence-volumen-Postgres.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "f_Apps", "f_Apps", "{BE199DF0-2D1F-4C54-967E-B6F1DAEC3528}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "a_ConfigMaps", "a_ConfigMaps", "{6FBA6B42-3D5C-4685-A256-81569A04C7A0}"
+	ProjectSection(SolutionItems) = preProject
+		k8s.ConfigMap-MySql.yaml = k8s.ConfigMap-MySql.yaml
+		k8s.ConfigMap-Postgres-NP.yaml = k8s.ConfigMap-Postgres-NP.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "d_Deployments", "d_Deployments", "{94EA0D5B-00B3-4933-A52D-63B594E86E6A}"
+	ProjectSection(SolutionItems) = preProject
+		k8s.Deployment-Adminer.yaml = k8s.Deployment-Adminer.yaml
+		k8s.Deployment-DbMySql-NP.yaml = k8s.Deployment-DbMySql-NP.yaml
+		k8s.Deployment-DbPostgres-NP.yaml = k8s.Deployment-DbPostgres-NP.yaml
+		k8s.Deployment-PgAdmin.yaml = k8s.Deployment-PgAdmin.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +81,12 @@ Global
 		{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 		{30E35E08-7268-450B-835A-1D03C1324CA5} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 		{8626C4B6-454C-49BA-BE6E-2D0639144AC4} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
+		{A3185F1A-474C-43B1-A3D9-8170B7FCA822} = {DC803753-153A-486A-8B9E-5FA6DEA85EA3}
+		{D2123765-8988-421F-BDFF-4FFE179D820C} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
+		{A22E8DE7-7510-4F4D-9D06-41EA8263C37F} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
+		{B2AD36AF-C105-41FC-B2FC-3089399FAEC8} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
+		{BE199DF0-2D1F-4C54-967E-B6F1DAEC3528} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
+		{6FBA6B42-3D5C-4685-A256-81569A04C7A0} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
+		{94EA0D5B-00B3-4933-A52D-63B594E86E6A} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
 	EndGlobalSection
 EndGlobal
