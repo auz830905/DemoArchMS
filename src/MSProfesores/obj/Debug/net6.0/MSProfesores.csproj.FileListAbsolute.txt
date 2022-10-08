@@ -85,8 +85,6 @@ D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Microsoft.OpenApi.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Npgsql.dll
-D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -109,7 +107,6 @@ D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.csproj.AssemblyReference.cache
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.GeneratedMSBuildEditorConfig.editorconfig
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.AssemblyInfoInputs.cache
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.AssemblyInfo.cs
@@ -124,3 +121,6 @@ D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\ref\MSProfesores.dll
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.pdb
 D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.genruntimeconfig.cache
+D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\MySqlConnector.dll
+D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\Otros Proyectos Web en C#\DemoMicroservicios\src\MSProfesores\obj\Debug\net6.0\MSProfesores.csproj.AssemblyReference.cache

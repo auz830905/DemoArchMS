@@ -1,0 +1,81 @@
+﻿@page "/profesores"
+@using global::Shared.DTOs
+@using Static
+@inject HttpClient Http
+
+<PageTitle>Gestionar Profesores</PageTitle>
+
+<h1>Gestionar Profesores</h1>
+<hr/>
+<br />
+
+<a href="/profe/create" class="btn btn-primary">
+    <span class="oi oi-plus"></span>
+    Añadir Profesor
+</a>
+<br />
+<br />
+
+@if (profesores == null)
+{
+    <div class="alert alert-info">Cargando Profesores...</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Carné Identidad</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profesor in profesores)
+            {
+                <tr>
+                    <td>@profesor.CI</td>
+                    <td>@profesor.Nombre</td>
+                    <td>@profesor.Apellidos</td>
+                    <td>
+                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor.CI))">
+                            <span class="oi oi-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Profesor>? profesores;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");
+        }
+        catch(Exception)
+        {
+            profesores = new List<Profesor>();    
+        }
+    }
+
+    protected async Task DeleteProfesor(string Ci)
+    {
+        try
+        {
+            var url = $"{Endpoints.DeleteProfesor}{Ci}";
+            await Http.DeleteAsync(url);
+            await OnInitializedAsync();    
+        }
+        catch(Exception)
+        {
+            await OnInitializedAsync();    
+        }
+    }
+}
+

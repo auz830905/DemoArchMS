@@ -15,10 +15,15 @@ builder.Services.AddCors();
 builder.Services.AddSwaggerExtension();
 builder.Services.AddInfraestructure();
 
-builder.Services.AddDbContext<DBContextProfesores>(options =>
+//builder.Services.AddDbContext<DBContextProfesores>(options =>
+//{
+//    var connections = Configuration.GetConnectionString("DefaultConnectionMySQL");
+//    options.UseMySql(connections, ServerVersion.AutoDetect(connections));
+//});
+
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextProfesores>(options =>
 {
-    var connections = Configuration.GetConnectionString("DefaultConnectionMySQL");
-    options.UseMySql(connections, ServerVersion.AutoDetect(connections));
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));    
 });
 
 var app = builder.Build();

@@ -10,10 +10,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();
 
 var app = builder.Build();
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,20 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSClases", "src\MSClases\MSClases.csproj", "{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSClases", "src\MSClases\MSClases.csproj", "{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSProfesores", "src\MSProfesores\MSProfesores.csproj", "{30E35E08-7268-450B-835A-1D03C1324CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSProfesores", "src\MSProfesores\MSProfesores.csproj", "{30E35E08-7268-450B-835A-1D03C1324CA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC803753-153A-486A-8B9E-5FA6DEA85EA3}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "src\APIGateway\APIGateway.csproj", "{8626C4B6-454C-49BA-BE6E-2D0639144AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "src\APIGateway\APIGateway.csproj", "{8626C4B6-454C-49BA-BE6E-2D0639144AC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DevOps", "DevOps", "{A3185F1A-474C-43B1-A3D9-8170B7FCA822}"
 EndProject
@@ -55,17 +55,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "d_Deployments", "d_Deployme
 		k8s.Deployment-PgAdmin.yaml = k8s.Deployment-PgAdmin.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{7ECC5362-9137-433C-AED9-D0DD0C9C9701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{7ECC5362-9137-433C-AED9-D0DD0C9C9701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "src\WebApp\WebApp.csproj", "{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp.csproj", "{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -89,6 +86,9 @@ Global
 		{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{445D3A3B-AEFD-471C-BFA2-1BFD644A5BBF} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 		{30E35E08-7268-450B-835A-1D03C1324CA5} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
@@ -102,5 +102,8 @@ Global
 		{94EA0D5B-00B3-4933-A52D-63B594E86E6A} = {A3185F1A-474C-43B1-A3D9-8170B7FCA822}
 		{7ECC5362-9137-433C-AED9-D0DD0C9C9701} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
 		{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0} = {8C1D0EE2-EE8C-4E9D-BBD7-650D46EBE8F2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A834CDE-850C-42DA-8536-75CDAB1C2423}
 	EndGlobalSection
 EndGlobal

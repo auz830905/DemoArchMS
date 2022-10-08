@@ -11,41 +11,49 @@ build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = WebApp
 build_property.RootNamespace = WebApp
-build_property.ProjectDir = /Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/
+build_property.ProjectDir = D:\Otros Proyectos Web en C#\DemoMicroservicios\src\WebApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp
+build_property.MSBuildProjectDirectory = D:\Otros Proyectos Web en C#\DemoMicroservicios\src\WebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/App.razor]
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Pages/FetchData.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmV0Y2hEYXRhLnJhem9y
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Pages/Lesson/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVzc29uXENyZWF0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Pages/Profesores.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmVzb3Jlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/_Imports.razor]
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Pages/Profe/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmVcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Shared/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-iymxgj1jkn
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-snfefjgk3b
 
-[/Users/arley/Trabajo/xtonlinesoftware/repositorio/DemoArchMS/src/WebApp/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-0rpgcxawqx
+[D:/Otros Proyectos Web en C\#/DemoMicroservicios/src/WebApp/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c2wpa7m53j

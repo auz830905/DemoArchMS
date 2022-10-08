@@ -16,9 +16,28 @@ namespace MSProfesores.Services
         public Task<bool> AddProfesor(Profesor profesor)
         {
             try { 
-                _db.Add<Profesor>(profesor);
+                _db.Profesores.Add(profesor);
                 _db.SaveChanges();
                 return Task.FromResult(true);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
+        public Task<bool> DeleteProfesor(string Ci)
+        {
+            try
+            {
+                var profesor = GetProfesor(Ci).Result;
+                if (profesor != null)
+                {
+                    _db.Profesores.Remove(profesor);
+                    _db.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                return Task.FromResult(false);
             }
             catch (Exception)
             {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VF8F60fjH+0r+0p9gRlCZGnKVZ2yWzsRajISgwU7PBEOtTZgInUnUTIXlTBN5szRD5evTn3PdO4e8vE0uG7FkA==",
+  "dgSpecHash": "fSjhoG0U8ja9x6FYojf5VpPyQcMxVGuN68bxdxwaFe0BaE/GySc5DLgK4/0ML1YUhTDaG2HPGx7iIFJrUT8OHA==",
   "success": true,
   "projectFilePath": "D:\\Otros Proyectos Web en C#\\DemoMicroservicios\\src\\MSProfesores\\MSProfesores.csproj",
   "expectedPackageFiles": [
@@ -35,8 +35,8 @@
     "C:\\Users\\Arley\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Arley\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Arley\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\Arley\\.nuget\\packages\\npgsql\\6.0.7\\npgsql.6.0.7.nupkg.sha512",
-    "C:\\Users\\Arley\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.7\\npgsql.entityframeworkcore.postgresql.6.0.7.nupkg.sha512",
+    "C:\\Users\\Arley\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512",
+    "C:\\Users\\Arley\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\6.0.2\\pomelo.entityframeworkcore.mysql.6.0.2.nupkg.sha512",
     "C:\\Users\\Arley\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Arley\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Arley\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

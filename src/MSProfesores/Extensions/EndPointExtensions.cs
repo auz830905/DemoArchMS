@@ -7,7 +7,7 @@ namespace MSProfesores.Extensions
 	{
 		internal static void AddEndPointsProfesoresExtension(this WebApplication app)
 		{
-            app.MapGet("/GetProfesorByCI/{ci}", async (IProfesoresRepository repository, string Ci) =>
+            app.MapGet("/GetProfesorByCI/{Ci}", async (IProfesoresRepository repository, string Ci) =>
             {
                 var profesor = await repository.GetProfesor(Ci);
 
@@ -37,6 +37,15 @@ namespace MSProfesores.Extensions
                 return Results.Problem(statusCode: 500, title: "Internal error");
             })
             .WithName("PostProfesor");
+
+            app.MapDelete("/DeleteProfesor", async (IProfesoresRepository repository, string Ci) =>
+            {
+                var result = await repository.DeleteProfesor(Ci);
+                if (result)
+                    return Results.NoContent();
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            })
+            .WithName("DeleteProfesor");
         }
 
     }

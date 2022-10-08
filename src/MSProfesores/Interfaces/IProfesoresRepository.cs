@@ -7,5 +7,6 @@ namespace MSProfesores.Interfaces
         Task<List<Profesor>> GetProfesores();
         Task<Profesor> GetProfesor(string Ci);
         Task<bool> AddProfesor(Profesor profesor);
+        Task<bool> DeleteProfesor(string Ci);
     }
 }

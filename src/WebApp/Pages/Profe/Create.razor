@@ -1,0 +1,30 @@
+﻿@page "/profe/create"
+
+@using global::Shared.DTOs
+@inject HttpClient Http
+@inject NavigationManager _navManager
+
+<PageTitle>Añadir Profesores</PageTitle>
+
+<h1>Añadir profesor</h1>
+<hr/>
+<br />
+
+<EditForm Model="@profesor" OnInvalidSubmit="AddProfesor">
+    <DataAnnotationsValidator/>
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>CI: </label>
+        <div ></div>
+    </div>
+</EditForm>
+
+@code {
+    Profesor profesor = new Profesor();
+
+    private async Task AddProfesor()
+    {
+        
+    }
+}
