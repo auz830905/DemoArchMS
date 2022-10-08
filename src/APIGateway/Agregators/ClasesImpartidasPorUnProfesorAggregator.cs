@@ -1,7 +1,7 @@
-﻿using APIGateway.DTOs;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Ocelot.Middleware;
 using Ocelot.Multiplexer;
+using Shared.DTOs;
 using System.Net;
 using System.Net.Http.Headers;
 

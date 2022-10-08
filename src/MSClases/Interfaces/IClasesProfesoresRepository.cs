@@ -1,5 +1,4 @@
-﻿using System;
-using MSClases.Models;
+﻿using MSClases.Models;
 
 namespace MSClases.Interfaces
 {

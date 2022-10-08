@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+﻿using Microsoft.OpenApi.Models;
 using MSProfesores.Interfaces;
 using MSProfesores.Services;
 

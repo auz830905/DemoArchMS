@@ -1,6 +1,4 @@
-﻿using System;
-using System.Numerics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MSProfesores.Models
 {

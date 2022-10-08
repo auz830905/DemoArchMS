@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection.Emit;
-using System.Runtime.ConstrainedExecution;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MSClases.Models
 {

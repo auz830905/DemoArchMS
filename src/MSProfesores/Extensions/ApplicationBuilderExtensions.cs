@@ -1,5 +1,4 @@
-﻿using System;
-namespace MSProfesores.Extensions
+﻿namespace MSProfesores.Extensions
 {
 	internal static class ApplicationBuilderExtensions
 	{

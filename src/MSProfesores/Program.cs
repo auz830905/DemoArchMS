@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MSProfesores.Extensions;
-using MSProfesores.Interfaces;
 using MSProfesores.Models;
 
 var builder = WebApplication.CreateBuilder(args);

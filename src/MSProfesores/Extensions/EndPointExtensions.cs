@@ -1,5 +1,4 @@
-﻿using System;
-using MSProfesores.Interfaces;
+﻿using MSProfesores.Interfaces;
 using MSProfesores.Models;
 
 namespace MSProfesores.Extensions

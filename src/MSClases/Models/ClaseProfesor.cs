@@ -1,7 +1,4 @@
-﻿using System;
-using System.Numerics;
-
-namespace MSClases.Models
+﻿namespace MSClases.Models
 {
 	public class ClaseProfesor
 	{

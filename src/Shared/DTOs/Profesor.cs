@@ -1,4 +1,4 @@
-﻿namespace APIGateway.DTOs
+﻿namespace Shared.DTOs
 {
     public class Profesor
     {

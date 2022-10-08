@@ -1,5 +1,4 @@
-﻿using System;
-namespace MSClases.Models
+﻿namespace MSClases.Models
 {
 	public class Clase
 	{
