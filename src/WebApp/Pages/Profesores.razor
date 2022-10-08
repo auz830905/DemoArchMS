@@ -77,5 +77,13 @@ else
             await OnInitializedAsync();    
         }
     }
+
+    protected async Task AddProfesor()
+    {
+        var postProfesorBody = new { Title = "Hola" };
+        using var response = await Http.PostAsJsonAsync($"{Endpoints.DeleteProfesor}", postProfesorBody);
+
+
+    }
 }
 
