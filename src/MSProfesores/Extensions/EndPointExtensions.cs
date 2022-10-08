@@ -1,4 +1,5 @@
-﻿using MSProfesores.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using MSProfesores.Interfaces;
 using MSProfesores.Models;
 
 namespace MSProfesores.Extensions
@@ -7,7 +8,7 @@ namespace MSProfesores.Extensions
 	{
 		internal static void AddEndPointsProfesoresExtension(this WebApplication app)
 		{
-            app.MapGet("/GetProfesorByCI/{Ci}", async (IProfesoresRepository repository, string Ci) =>
+            app.MapGet("/api/profesores/{Ci}", async (IProfesoresRepository repository, string Ci) =>
             {
                 var profesor = await repository.GetProfesor(Ci);
 
@@ -18,7 +19,7 @@ namespace MSProfesores.Extensions
             })
             .WithName("GetProfesorByCI");
 
-            app.MapGet("/GetProfesores", async (IProfesoresRepository repository) =>
+            app.MapGet("/api/profesores", async (IProfesoresRepository repository) =>
             {
                 var profesores = await repository.GetProfesores();
 
@@ -29,7 +30,7 @@ namespace MSProfesores.Extensions
             })
             .WithName("GetProfesores");
 
-            app.MapPost("/PostProfesor", async (IProfesoresRepository repository, Profesor profesor) =>
+            app.MapPost("/api/profesores", async (IProfesoresRepository repository, [FromBody] Profesor profesor) =>
             {
                 var result = await repository.AddProfesor(profesor);
                 if (result)
@@ -38,7 +39,7 @@ namespace MSProfesores.Extensions
             })
             .WithName("PostProfesor");
 
-            app.MapDelete("/DeleteProfesor", async (IProfesoresRepository repository, string Ci) =>
+            app.MapDelete("/api/profesores/{Ci}", async (IProfesoresRepository repository, string Ci) =>
             {
                 var result = await repository.DeleteProfesor(Ci);
                 if (result)
