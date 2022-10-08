@@ -79,8 +79,9 @@
       "Key": "post_clase_profesor"
     },
     {
-      "DownstreamPathTemplate": "/GetProfesorByCI/{Ci}",
-      "UpstreamHttpMethod": [],
+      "UpstreamPathTemplate": "/gateway/profesores/{Ci}",
+      "DownstreamPathTemplate": "/api/profesores/{Ci}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -88,12 +89,12 @@
           "Port": 7261
         }
       ],
-      "UpstreamPathTemplate": "/GetProfesorByCI/{Ci}",
       "Key": "get_profesor_by_id"
     },
     {
-      "DownstreamPathTemplate": "/GetProfesores",
-      "UpstreamHttpMethod": [],
+      "UpstreamPathTemplate": "/gateway/profesores",
+      "DownstreamPathTemplate": "/api/profesores",
+      "UpstreamHttpMethod": ["Get"],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -101,7 +102,6 @@
           "Port": 7261
         }
       ],
-      "UpstreamPathTemplate": "/GetProfesores",
       "Key": "get_profesores"
     },
     {
@@ -116,19 +116,6 @@
       ],
       "UpstreamPathTemplate": "/PostProfesor",
       "Key": "post_profesor"
-    },
-    {
-      "DownstreamPathTemplate": "/DeleteProfesor/{Ci}",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7261
-        }
-      ],
-      "UpstreamPathTemplate": "/DeleteProfesor/{Ci}",
-      "Key": "delete_profesor"
     }
   ],
   "GlobalConfiguration": {
