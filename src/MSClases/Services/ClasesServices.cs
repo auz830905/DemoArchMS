@@ -16,9 +16,28 @@ namespace MSClases.Services
         {
             try
             {
-                _db.Add<Clase>(clase);
+                _db.Clases.Add(clase);
                 _db.SaveChanges();
                 return Task.FromResult(true);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
+        public Task<bool> DeleteClase(int Id)
+        {
+            try
+            {
+                var clase = GetClase(Id).Result;
+                if (clase != null)
+                {
+                    _db.Clases.Remove(clase);
+                    _db.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                return Task.FromResult(false);
             }
             catch (Exception)
             {
