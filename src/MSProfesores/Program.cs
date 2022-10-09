@@ -28,7 +28,13 @@ builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextProfesores>
 
 var app = builder.Build();
 
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+app.UseCors(cors => cors
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials()
+);
+
 app.ConfigureSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
