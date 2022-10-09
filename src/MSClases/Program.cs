@@ -15,15 +15,25 @@ builder.Services.AddCors();
 builder.Services.AddSwaggerExtension();
 builder.Services.AddInfraestructure();
 
-builder.Services.AddDbContext<DBContextClases>(options =>
+//builder.Services.AddDbContext<DBContextClases>(options =>
+//{
+//    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL"));
+//});
+
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>
 {
-    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL"));
-              
+    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 });
 
 var app = builder.Build();
 
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+app.UseCors(cors => cors
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials()
+);
+
 app.ConfigureSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
