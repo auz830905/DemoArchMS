@@ -2,6 +2,7 @@
 @using global::Shared.DTOs
 @using Static
 @inject HttpClient Http
+@inject IJSRuntime js
 
 <PageTitle>Gestionar Profesores</PageTitle>
 
@@ -39,7 +40,7 @@ else
                     <td>@profesor.Nombre</td>
                     <td>@profesor.Apellidos</td>
                     <td>
-                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor.CI))">
+                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor))">
                             <span class="oi oi-trash"></span>
                         </button>
                     </td>
@@ -64,26 +65,23 @@ else
         }
     }
 
-    protected async Task DeleteProfesor(string Ci)
+    protected async Task DeleteProfesor(Profesor profesor)
     {
         try
         {
-            var url = $"{Endpoints.DeleteProfesor}{Ci}";
-            await Http.DeleteAsync(url);
-            await OnInitializedAsync();    
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Desea eliminar al profesor {profesor.Nombre} {profesor.Apellidos}?");
+            if (confirm)
+            {
+                var url = $"{Endpoints.DeleteProfesor}{profesor.CI}";
+                await Http.DeleteAsync(url);
+                await OnInitializedAsync();  
+            }              
         }
-        catch(Exception)
+        catch(Exception e)
         {
+            Console.Write(e);
             await OnInitializedAsync();    
         }
-    }
-
-    protected async Task AddProfesor()
-    {
-        var postProfesorBody = new { Title = "Hola" };
-        using var response = await Http.PostAsJsonAsync($"{Endpoints.DeleteProfesor}", postProfesorBody);
-
-
     }
 }
 
