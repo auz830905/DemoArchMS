@@ -17,7 +17,12 @@ builder.Services.AddOcelot()
 
 var app = builder.Build();
 
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+app.UseCors(cors => cors
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(origin => true)
+    .AllowCredentials()    
+);
 
 if (app.Environment.IsDevelopment())
 {
