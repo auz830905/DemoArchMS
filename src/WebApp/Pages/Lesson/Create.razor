@@ -1,37 +1,49 @@
 ﻿@page "/lesson/create"
 
 @using global::Shared.DTOs
+@using Static
 @inject HttpClient Http
 @inject NavigationManager _navManager
 
-<PageTitle>Añadir Clases</PageTitle>
+<PageTitle>Añadir Clase</PageTitle>
 
-<h1>Añadir clase</h1>
+<h1>Añadir Clase</h1>
 <hr/>
 <br />
 
-<EditForm Model="@clase" OnInvalidSubmit="AddClase">
-    
+<EditForm Model="@clase" OnSubmit="AddClase">
+   @* <DataAnnotationsValidator/>
+    <ValidationSummary />*@    
 
     <div class="form-group">
-        <label>Profesor: </label>
+        <label>Nombre Clase: </label>
         <div>
-            @*<select @bind="clase.Profesor."*@
+            <InputText @bind-Value="@clase.Nombre" class="form-control"/>           
         </div>
     </div>
+
+    <br />
+    <button type="submit" class="form-control btn btn-primary">
+        <span class="oi oi-check"></span>
+        Crear Clase
+    </button>
 </EditForm>
 
 @code {
-    private Clase clase = new Clase();
-    private List<Profesor>? profesores;
+    Clase clase = new Clase();
 
     private async Task AddClase()
     {
-        
-    }
-
-    private async Task GetProfesores()
-    {
-        profesores = await Http.GetFromJsonAsync<List<Profesor>>("https://localhost:7119/GetProfesores");
+        try
+        {
+            var postClaseBody = new { nombre = clase.Nombre };
+            Console.Write(postClaseBody);
+            using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClase}", postClaseBody);
+            _navManager.NavigateTo("/clases");
+        }
+        catch(Exception e)
+        {
+            Console.Write(e);
+        }
     }
 }
