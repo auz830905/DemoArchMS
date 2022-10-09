@@ -8,16 +8,16 @@
   ],
   "Routes": [
     {
-      "DownstreamPathTemplate": "/GetClasesById/{Id}",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
+      "UpstreamPathTemplate": "/gateway/clases/{Id}",
+      "DownstreamPathTemplate": "/api/clases/{Id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 30203
+          "Port": 7014
         }
       ],
-      "UpstreamPathTemplate": "/GetClasesById/{Id}",
       "Key": "clases_by_id" //,
       //"AuthenticationOptions": {
       //  "AuthenticationProviderKey": "Bearer"
@@ -27,31 +27,18 @@
       //}
     },
     {
-      "DownstreamPathTemplate": "/GetClases",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
+      "UpstreamPathTemplate": "/gateway/clases",
+      "DownstreamPathTemplate": "/api/clases",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 30203
+          "Port": 7014
         }
       ],
-      "UpstreamPathTemplate": "/GetClases",
       "Key": "clases"
-    },
-    {
-      "DownstreamPathTemplate": "/PostClase",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 30203
-        }
-      ],
-      "UpstreamPathTemplate": "/PostClase",
-      "Key": "post_clase"
-    },
+    },    
     {
       "DownstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
       "UpstreamHttpMethod": [],
@@ -94,7 +81,7 @@
     {
       "UpstreamPathTemplate": "/gateway/profesores",
       "DownstreamPathTemplate": "/api/profesores",
-      "UpstreamHttpMethod": ["Get"],
+      "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -103,20 +90,7 @@
         }
       ],
       "Key": "get_profesores"
-    },
-    {
-      "DownstreamPathTemplate": "/PostProfesor",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 30202
-        }
-      ],
-      "UpstreamPathTemplate": "/PostProfesor",
-      "Key": "post_profesor"
-    }
+    }    
   ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7119"
