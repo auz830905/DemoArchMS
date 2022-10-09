@@ -1,0 +1,86 @@
+﻿@page "/clases"
+
+@using global::Shared.DTOs
+@using Static
+@inject HttpClient Http
+@inject IJSRuntime js
+
+<PageTitle>Gestionar Clases</PageTitle>
+
+<h1>Gestionar Clases</h1>
+<hr/>
+<br />
+
+<a href="/lesson/create" class="btn btn-primary">
+    <span class="oi oi-plus"></span>
+    Añadir Clase
+</a>
+<br />
+<br />
+
+@if (clases == null)
+{
+    <div class="alert alert-info">Cargando Clases...</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Nombre Clase</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var clase in clases)
+            {
+                <tr>
+                    <td>@clase.Id</td>
+                    <td>@clase.Nombre</td>
+                    <td>
+                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase))">
+                            <span class="oi oi-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Clase>? clases;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            clases = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesList}");
+        }
+        catch(Exception)
+        {
+            clases = new List<Clase>();    
+        }
+    }
+
+    protected async Task DeleteClase(Clase clase)
+    {
+        try
+        {
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Desea eliminar la clase de {clase.Nombre}?");
+            if (confirm)
+            {
+                var url = $"{Endpoints.DeleteClase}{clase.Id}";
+                await Http.DeleteAsync(url);
+                await OnInitializedAsync();  
+            }              
+        }
+        catch(Exception e)
+        {
+            Console.Write(e);
+            await OnInitializedAsync();    
+        }
+    }
+}
+
