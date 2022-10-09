@@ -1,6 +1,7 @@
 ﻿@page "/profe/create"
 
 @using global::Shared.DTOs
+@using Static
 @inject HttpClient Http
 @inject NavigationManager _navManager
 
@@ -10,20 +11,36 @@
 <hr/>
 <br />
 
-<EditForm Model="@profesor" OnInvalidSubmit="AddProfesor">
-    <DataAnnotationsValidator/>
-    
+<EditForm Model="@profesor" OnSubmit="AddProfesor">
+   @* <DataAnnotationsValidator/>
+    <ValidationSummary />*@
 
     <div class="form-group">
         <label>CI: </label>
         <div>
-
+            <InputText @bind-Value="@profesor.CI" class="form-control"/>
         </div>
     </div>
 
-    
+    <div class="form-group">
+        <label>Nombre: </label>
+        <div>
+            <InputText @bind-Value="@profesor.Nombre" class="form-control"/>           
+        </div>
+    </div>
 
-    
+    <div class="form-group">
+        <label>Apellidos: </label>
+        <div>
+            <InputText @bind-Value="@profesor.Apellidos" class="form-control"/>            
+        </div>
+    </div>
+
+    <br />
+    <button type="submit" class="form-control btn btn-primary">
+        <span class="oi oi-check"></span>
+        Crear Profesor
+    </button>
 </EditForm>
 
 @code {
@@ -31,6 +48,16 @@
 
     private async Task AddProfesor()
     {
-        
+        try
+        {
+            var postProfesorBody = new { ci = profesor.CI, nombre = profesor.Nombre, apellidos = profesor.Apellidos };
+            Console.Write(postProfesorBody);
+            using var response = await Http.PostAsJsonAsync($"{Endpoints.AddProfesor}", postProfesorBody);
+            _navManager.NavigateTo("/profesores");
+        }
+        catch(Exception e)
+        {
+            Console.Write(e);
+        }
     }
 }
