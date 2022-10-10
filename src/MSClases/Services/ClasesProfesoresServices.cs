@@ -12,7 +12,7 @@ namespace MSClases.Services
             _db = db;
         }
 
-        public Task<bool> AddProfesorAClase(string ci, int IdClase)
+        public Task<bool> AddProfesorAClase(string Ci, int IdClase)
         {
             try
             {
@@ -23,15 +23,43 @@ namespace MSClases.Services
                     var claseProfesor = new ClaseProfesor()
                     {
                         IdClase = IdClase,
-                        Ci = ci,
+                        Ci = Ci,
                         IdClaseNavigation = clase
                     };
 
-                    _db.Add<ClaseProfesor>(claseProfesor);
+                    _db.ClaseProfesors.Add(claseProfesor);
                     _db.SaveChanges();
                     return Task.FromResult(true);
                 }
 
+                return Task.FromResult(false);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
+        public Task<bool> DeleteClaseProfesor(string Ci, int IdClase)
+        {
+            try
+            {
+                var clase = _db.Clases.FirstOrDefault(c => c.Id == IdClase);
+
+                if (clase != null)
+                {
+                    var claseProfesor = new ClaseProfesor()
+                    {
+                        Ci = Ci,
+                        IdClase = IdClase,
+                        IdClaseNavigation = clase
+                    };
+
+                    _db.ClaseProfesors.Remove(claseProfesor);
+                    _db.SaveChanges();
+                    return Task.FromResult(true);
+                }
+       
                 return Task.FromResult(false);
             }
             catch (Exception)
