@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ms-clases-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-ms-clases
+  template:
+    metadata:
+      labels:
+        app: app-ms-clases
+    spec:
+      containers:
+        - name: app-ms-clases
+          image: api_ms_clases:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 30462
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"          
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: Development
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-ms-clases-service
+  labels:
+    app: app-ms-clases
+spec:
+  ports:
+    - name: app-ms-clases
+      port: 80      
+      nodePort: 30462
+  type: NodePort   
+  selector:
+    app: app-ms-clases

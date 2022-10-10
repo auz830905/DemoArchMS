@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ms-profesores-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-ms-profesores
+  template:
+    metadata:
+      labels:
+        app: app-ms-profesores
+    spec:
+      containers:
+        - name: app-ms-profesores
+          image: api_ms_profesores:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 30463
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"          
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: Development
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-ms-profesores-service
+  labels:
+    app: app-ms-profesores
+spec:
+  ports:
+    - name: app-ms-profesores
+      port: 80      
+      nodePort: 30463
+  type: NodePort   
+  selector:
+    app: app-ms-profesores

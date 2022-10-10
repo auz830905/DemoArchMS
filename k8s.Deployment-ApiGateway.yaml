@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-api-gateway
+  template:
+    metadata:
+      labels:
+        app: app-api-gateway
+    spec:
+      containers:
+        - name: app-api-gateway
+          image: api_ms_profesores:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 30461
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"          
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: Development
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-api-gateway-service
+  labels:
+    app: app-api-gateway
+spec:
+  ports:
+    - name: app-api-gateway
+      port: 80      
+      nodePort: 30461
+  type: NodePort   
+  selector:
+    app: app-api-gateway

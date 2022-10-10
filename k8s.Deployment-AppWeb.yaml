@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-web-blazor-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-web-blazor
+  template:
+    metadata:
+      labels:
+        app: app-web-blazor
+    spec:
+      containers:
+        - name: app-web-blazor
+          image: app_web_blazor:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 30460
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"          
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: Development
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-web-blazor-service
+  labels:
+    app: app-web-blazor
+spec:
+  ports:
+    - name: app-web-blazor
+      port: 80      
+      nodePort: 30460
+  type: NodePort   
+  selector:
+    app: app-web-blazor
