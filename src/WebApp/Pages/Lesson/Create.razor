@@ -23,7 +23,7 @@
     </div>
 
     <br />
-    <button type="submit" class="form-control btn btn-primary">
+    <button type="submit" class="btn btn-primary">
         <span class="oi oi-check"></span>
         Crear Clase
     </button>
@@ -41,9 +41,9 @@
             using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClase}", postClaseBody);
             _navManager.NavigateTo("/clases");
         }
-        catch(Exception e)
+        catch(Exception)
         {
-            Console.Write(e);
+            
         }
     }
 }

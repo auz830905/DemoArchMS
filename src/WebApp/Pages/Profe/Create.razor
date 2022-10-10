@@ -37,7 +37,7 @@
     </div>
 
     <br />
-    <button type="submit" class="form-control btn btn-primary">
+    <button type="submit" class="btn btn-primary">
         <span class="oi oi-check"></span>
         Crear Profesor
     </button>
@@ -55,9 +55,9 @@
             using var response = await Http.PostAsJsonAsync($"{Endpoints.AddProfesor}", postProfesorBody);
             _navManager.NavigateTo("/profesores");
         }
-        catch(Exception e)
+        catch(Exception)
         {
-            Console.Write(e);
+            
         }
     }
 }
