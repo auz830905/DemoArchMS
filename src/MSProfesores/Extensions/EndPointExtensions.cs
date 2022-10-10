@@ -47,6 +47,13 @@ namespace MSProfesores.Extensions
                 return Results.Problem(statusCode: 500, title: "Internal error");
             })
             .WithName("DeleteProfesor");
+
+            app.MapPut("/api/profesores", async (IProfesoresRepository repository, [FromBody] Profesor profesor) =>
+            {
+                var result = await repository.UpdateProfesor(profesor);
+                return Results.Ok(result);
+            })
+            .WithName("UpdateProfesor");
         }
 
     }

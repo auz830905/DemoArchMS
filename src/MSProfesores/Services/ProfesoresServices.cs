@@ -56,5 +56,12 @@ namespace MSProfesores.Services
             var profesores = _db.Profesores.ToList<Profesor>();
             return Task.FromResult(profesores);
         }
+
+        public Task<Profesor> UpdateProfesor(Profesor profesor)
+        {
+            _db.Profesores.Update(profesor);
+            _db.SaveChanges();
+            return Task.FromResult(profesor);
+        }
     }
 }

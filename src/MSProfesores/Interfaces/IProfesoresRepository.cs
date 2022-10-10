@@ -8,5 +8,6 @@ namespace MSProfesores.Interfaces
         Task<Profesor> GetProfesor(string Ci);
         Task<bool> AddProfesor(Profesor profesor);
         Task<bool> DeleteProfesor(string Ci);
+        Task<Profesor> UpdateProfesor(Profesor profesor);
     }
 }
