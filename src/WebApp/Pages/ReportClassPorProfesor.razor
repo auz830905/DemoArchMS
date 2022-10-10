@@ -1,0 +1,135 @@
+﻿@page "/reportclassporprofesor"
+
+@using global::Shared.DTOs 
+@using Static
+
+@inject HttpClient Http
+@inject IJSRuntime js
+
+<PageTitle>Clases por Profesores</PageTitle>
+
+<h1>Reporte de clases por Profesores</h1>
+<hr />
+<br />
+
+
+@if (profesores == null)
+{
+    <div class="alert alert-info">Cargando Reporte...</div>
+}
+else
+{
+    <div class="form-group">
+        <div>
+            <select @onchange="@((ChangeEventArgs e) => LoadClases(e))" class="form-control">
+
+                @if (profesores.Count != 0)
+                {
+                    <option value="">Seleccione un profesor</option>
+                    @foreach (var profesor in profesores)
+                    {
+                        <option value="@profesor.CI">@profesor.Nombre @profesor.Apellidos</option>
+                    }
+                }
+                else
+                {
+                    <option value="">No hay profesores insertados</option>
+                }
+            </select>
+        </div>
+    </div>
+}
+
+   <table class="table">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Nombre Clase</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (clases != null && clases.Count != 0)
+            {
+                @foreach (var clase in clases)
+                {
+                    <tr>
+                        <td>@clase.Id</td>
+                        <td>@clase.Nombre</td>
+                        <td>
+                            <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase, CiSelected))">
+                                <span class="oi oi-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <center><b>No hay datos para mostrar</b></center>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@code {
+    private List<Profesor>? profesores;
+    private List<Clase>? clases;
+    private string? CiSelected = string.Empty;
+    private ChangeEventArgs? e;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");
+        }
+        catch (Exception)
+        {
+            profesores = new List<Profesor>();
+        }
+    }
+
+    protected async void LoadClases(ChangeEventArgs e)
+    {
+        this.e = e;
+        CiSelected = (e.Value != null) ? e.Value.ToString() : "";
+        await LoadClasesByCi();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    protected async Task LoadClasesByCi()
+    {
+        try
+        {
+            clases?.Clear();
+            clases = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesByProfesor}{CiSelected}");
+        }
+        catch (Exception)
+        {
+            clases = new List<Clase>();
+        }
+    }
+
+    protected async Task DeleteClase(Clase clase, string Ci)
+    {
+        try
+        {
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Desea eliminar la clase de {clase.Nombre}?");
+            if (confirm)
+            {
+                var url = $"{Endpoints.DeleteClasesProfesor}{Ci}/{clase.Id}";
+                await Http.DeleteAsync(url);
+                LoadClases(this.e!);
+            }
+        }
+        catch (Exception)
+        {
+            await OnInitializedAsync();
+        }
+    }
+}
+
