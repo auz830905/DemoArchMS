@@ -1,6 +1,9 @@
 ﻿@page "/profesores"
+
 @using global::Shared.DTOs
 @using Static
+
+@inject NavigationManager _navManager
 @inject HttpClient Http
 @inject IJSRuntime js
 
@@ -33,20 +36,34 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var profesor in profesores)
+            @if (profesores.Count != 0)
+            {
+                @foreach (var profesor in profesores)
+                {
+                    <tr>
+                        <td>@profesor.CI</td>
+                        <td>@profesor.Nombre</td>
+                        <td>@profesor.Apellidos</td>
+                        <td>
+                            <a class="btn btn-outline-warning" href='/profe/update/@profesor.CI'>
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                             <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor))">
+                                <span class="oi oi-trash"></span>
+                            </button>
+                        </td>                       
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@profesor.CI</td>
-                    <td>@profesor.Nombre</td>
-                    <td>@profesor.Apellidos</td>
-                    <td>
-                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor))">
-                            <span class="oi oi-trash"></span>
-                        </button>
+                    <td colspan="4">
+                        <center><b>No hay datos para mostrar</b></center>
                     </td>
-                </tr>
+                </tr>    
             }
-        </tbody>
+         </tbody>
     </table>
 }
 
@@ -72,8 +89,8 @@ else
             var confirm = await js.InvokeAsync<bool>("confirm", $"Desea eliminar al profesor {profesor.Nombre} {profesor.Apellidos}?");
             if (confirm)
             {
-                var url = $"{Endpoints.DeleteProfesor}{profesor.CI}";
-                await Http.DeleteAsync(url);
+                await Http.DeleteAsync($"{Endpoints.DeleteProfesor}{profesor.CI}");
+                await Http.DeleteAsync($"{Endpoints.DeleteClasesProfesor}{profesor.CI}");
                 await OnInitializedAsync();  
             }              
         }
