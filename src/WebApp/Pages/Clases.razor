@@ -33,17 +33,31 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var clase in clases)
+            @if (clases.Count != 0)
             {
+                @foreach (var clase in clases)
+                {
                 <tr>
                     <td>@clase.Id</td>
                     <td>@clase.Nombre</td>
                     <td>
+                        <a class="btn btn-outline-warning" href='/lesson/update/@clase.Id'>
+                          <span class="oi oi-pencil"></span>
+                        </a>
                         <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase))">
                             <span class="oi oi-trash"></span>
                         </button>
                     </td>
                 </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        <center><b>No hay datos para mostrar</b></center>
+                    </td>
+                </tr>     
             }
         </tbody>
     </table>
@@ -78,7 +92,6 @@ else
         }
         catch(Exception e)
         {
-            Console.Write(e);
             await OnInitializedAsync();    
         }
     }
