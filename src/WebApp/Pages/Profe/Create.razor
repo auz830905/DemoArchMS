@@ -50,8 +50,7 @@
     {
         try
         {
-            var postProfesorBody = new { ci = profesor.CI, nombre = profesor.Nombre, apellidos = profesor.Apellidos };
-            Console.Write(postProfesorBody);
+            var postProfesorBody = new { ci = profesor.CI, nombre = profesor.Nombre, apellidos = profesor.Apellidos };            
             using var response = await Http.PostAsJsonAsync($"{Endpoints.AddProfesor}", postProfesorBody);
             _navManager.NavigateTo("/profesores");
         }
