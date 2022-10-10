@@ -1,0 +1,57 @@
+﻿@page "/lesson/update/{id}"
+
+@using global::Shared.DTOs
+@using Static
+
+@inject HttpClient Http
+@inject NavigationManager _navManager
+@inject IJSRuntime js
+
+<PageTitle>Actualizar Clase</PageTitle>
+
+<h1>Actualizar clase</h1>
+<hr/>
+<br />
+
+<EditForm Model="@clase" OnSubmit="UpdateClase">
+   @* <DataAnnotationsValidator/>
+    <ValidationSummary />*@
+    
+    <div class="form-group">
+        <label>Nombre: </label>
+        <div>
+            <InputText @bind-Value="@clase!.Nombre" class="form-control"/>           
+        </div>
+    </div>    
+
+    <br />
+    <button type="submit" class="btn btn-primary">
+        <span class="oi oi-check"></span>
+        Actualizar Clase
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] 
+    public string id { get; set; }
+    protected Clase clase = new Clase();
+
+    protected override async Task OnInitializedAsync()
+    {
+        clase = await Http.GetFromJsonAsync<Clase>($"{Endpoints.Clase}{id}");     
+    }
+
+    private async Task UpdateClase()
+    {
+        try
+        {
+            var url = $"{Endpoints.UpdateClase}";
+            using var response = await Http.PutAsJsonAsync(url, clase);
+            _navManager.NavigateTo("/clases");
+        }
+        catch(Exception)
+        {
+            
+        }
+    }
+}
