@@ -28,11 +28,8 @@ app.UseCors(cors => cors
     .AllowCredentials()    
 );
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
