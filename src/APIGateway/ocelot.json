@@ -14,8 +14,8 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7014
+          "Host": "https://192.168.49.2",
+          "Port": 30462
         }
       ],
       "Key": "clases_by_id" //,
@@ -33,8 +33,8 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7014
+          "Host": "https://192.168.49.2",
+          "Port": 30462
         }
       ],
       "Key": "clases"
@@ -46,8 +46,8 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7014
+          "Host": "https://192.168.49.2",
+          "Port": 30462
         }
       ],
       "Key": "clase_by_profesor"
@@ -59,8 +59,8 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7014
+          "Host": "https://192.168.49.2",
+          "Port": 30462
         }
       ],
       "Key": "get_clase_not_assign_profesor"
@@ -72,8 +72,8 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 7014
+          "Host": "https://192.168.49.2",
+          "Port": 30462
         }
       ],
       "Key": "post_clase_profesor"
@@ -85,7 +85,7 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "https://192.168.49.2",
           "Port": 7261
         }
       ],
@@ -98,7 +98,7 @@
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "https://192.168.49.2",
           "Port": 7261
         }
       ],
@@ -106,6 +106,6 @@
     }    
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7119"
+    "BaseUrl": "https://192.168.49.2:30461"
   }
 }
