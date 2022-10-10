@@ -38,31 +38,31 @@
         }
       ],
       "Key": "clases"
-    },    
+    },
     {
-      "DownstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
+      "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}",
+      "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 30203
+          "Port": 7014
         }
       ],
-      "UpstreamPathTemplate": "/GetClasesByProfesorId/{Ci}",
       "Key": "get_clase_by_profesor"
     },
     {
-      "DownstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
-      "UpstreamHttpMethod": [],
-      "DownstreamSCheme": "http",
+      "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/{IdClase}",
+      "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}/{IdClase}",
+      "UpstreamHttpMethod": [ "Post", "Delete" ],
+      "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 30203
+          "Port": 7014
         }
       ],
-      "UpstreamPathTemplate": "/PostClaseProfesor/{IdClase}/{Ci}",
       "Key": "post_clase_profesor"
     },
     {
