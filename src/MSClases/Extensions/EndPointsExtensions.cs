@@ -50,7 +50,7 @@ namespace MSClases.Extensions
 
         internal static void AddEndPointClasesProfesoresExtensions(this WebApplication app)
         {
-            app.MapGet("/GetClasesByProfesorId/{Ci}", async (IClasesProfesoresRepository repository, string Ci) =>
+            app.MapGet("/api/clasesprofesores/{Ci}", async (IClasesProfesoresRepository repository, string Ci) =>
             {
                 var clases = await repository.GetClasesByProfesor(Ci);
 
@@ -61,7 +61,7 @@ namespace MSClases.Extensions
             })
             .WithName("GetClasesByProfesorId");
 
-            app.MapPost("/PostClaseProfesor/{IdClase}/{Ci}", async (IClasesProfesoresRepository repository, int IdClase, string Ci) =>
+            app.MapPost("/api/clasesprofesores/{Ci}/{IdClase}", async (IClasesProfesoresRepository repository, string Ci, int IdClase) =>
             {
                 var result = await repository.AddProfesorAClase(Ci, IdClase);
                 if (result)
@@ -69,6 +69,15 @@ namespace MSClases.Extensions
                 return Results.Problem(statusCode: 500, title: "Internal error");
             })
             .WithName("PostClaseProfesor");
+
+            app.MapDelete("/api/clasesprofesores/{Ci}/{IdClase}", async (IClasesProfesoresRepository repository, string Ci, int IdClase) =>
+            {
+                var result = await repository.DeleteClaseProfesor(Ci, IdClase);
+                if (result)
+                    return Results.NoContent();
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            })
+            .WithName("DeleteClaseProfesor");
         }
 
     }
