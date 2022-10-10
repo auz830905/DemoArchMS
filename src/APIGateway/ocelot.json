@@ -2,7 +2,7 @@
   "Aggregates": [
     {
       "UpstreamPathTemplate": "/ClasesImpartidasPorUnProfesor/{Ci}",
-      "RouteKeys": [ "get_clase_by_profesor", "get_profesor_by_id" ],
+      "RouteKeys": [ "clase_by_profesor", "profesor_by_id" ],
       "Aggregator": "ClasesImpartidasPorUnProfesorAggregator"
     }
   ],
@@ -29,7 +29,7 @@
     {
       "UpstreamPathTemplate": "/gateway/clases",
       "DownstreamPathTemplate": "/api/clases",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -42,6 +42,19 @@
     {
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}",
       "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamSCheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7014
+        }
+      ],
+      "Key": "clase_by_profesor"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/clasesnotassign",
+      "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}/clasesnotassign",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
@@ -50,7 +63,7 @@
           "Port": 7014
         }
       ],
-      "Key": "get_clase_by_profesor"
+      "Key": "get_clase_not_assign_profesor"
     },
     {
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/{IdClase}",
@@ -76,12 +89,12 @@
           "Port": 7261
         }
       ],
-      "Key": "get_profesor_by_id"
+      "Key": "profesor_by_id"
     },
     {
       "UpstreamPathTemplate": "/gateway/profesores",
       "DownstreamPathTemplate": "/api/profesores",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamSCheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -89,7 +102,7 @@
           "Port": 7261
         }
       ],
-      "Key": "get_profesores"
+      "Key": "profesores"
     }    
   ],
   "GlobalConfiguration": {
