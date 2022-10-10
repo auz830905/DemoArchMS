@@ -36,8 +36,7 @@
     {
         try
         {
-            var postClaseBody = new { nombre = clase.Nombre };
-            Console.Write(postClaseBody);
+            var postClaseBody = new { nombre = clase.Nombre };           
             using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClase}", postClaseBody);
             _navManager.NavigateTo("/clases");
         }
