@@ -11,5 +11,9 @@
         public static string ClasesList = $"{BaseUrl}/gateway/clases";
         public static string AddClase = $"{BaseUrl}/gateway/clases";
         public static string DeleteClase = $"{BaseUrl}/gateway/clases/";
+
+        public static string ClasesByProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
+        public static string AddClaseProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
+        public static string DeleteClasesProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
     }
 }
