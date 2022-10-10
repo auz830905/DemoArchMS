@@ -1,4 +1,5 @@
-﻿using MSClases.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using MSClases.Interfaces;
 using MSClases.Models;
 
 namespace MSClases.Extensions
@@ -46,6 +47,13 @@ namespace MSClases.Extensions
                 return Results.Problem(statusCode: 500, title: "Internal error");
             })
             .WithName("DeleteClase");
+
+            app.MapPut("/api/clases", async (IClasesRepository repository, [FromBody] Clase clase) =>
+            {
+                var result = await repository.UpdateClase(clase);
+                return Results.Ok(result);
+            })
+           .WithName("UpdateClase");
         }
 
         internal static void AddEndPointClasesProfesoresExtensions(this WebApplication app)
@@ -60,6 +68,17 @@ namespace MSClases.Extensions
                 return Results.NoContent();
             })
             .WithName("GetClasesByProfesorId");
+
+            app.MapGet("/api/clasesprofesores/{Ci}/clasesnotassign", async (IClasesProfesoresRepository repository, string Ci) =>
+            {
+                var clases = await repository.GetClasesNotAsinadasAProfesor(Ci);
+
+                if (clases != null)
+                    return Results.Ok(clases);
+
+                return Results.NoContent();
+            })
+           .WithName("GetClasesNotAsignedProfesorId");
 
             app.MapPost("/api/clasesprofesores/{Ci}/{IdClase}", async (IClasesProfesoresRepository repository, string Ci, int IdClase) =>
             {
@@ -78,6 +97,15 @@ namespace MSClases.Extensions
                 return Results.Problem(statusCode: 500, title: "Internal error");
             })
             .WithName("DeleteClaseProfesor");
+
+            app.MapDelete("/api/clasesprofesores/{Ci}", async (IClasesProfesoresRepository repository, string Ci) =>
+            {
+                var result = await repository.DeleteClaseProfesor(Ci);
+                if (result)
+                    return Results.NoContent();
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            })
+           .WithName("DeleteClasesPorProfesor");
         }
 
     }
