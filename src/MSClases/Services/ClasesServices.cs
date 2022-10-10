@@ -53,8 +53,15 @@ namespace MSClases.Services
 
         public Task<List<Clase>> GetClases()
         {
-            var clases = _db.Clases.ToList<Clase>();
+            var clases = _db.Clases.ToList();
             return Task.FromResult(clases);
+        }
+
+        public Task<Clase> UpdateClase(Clase clase)
+        {
+            _db.Clases.Update(clase);
+            _db.SaveChanges();
+            return Task.FromResult(clase);
         }
     }
 }

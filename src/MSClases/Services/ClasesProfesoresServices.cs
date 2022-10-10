@@ -68,6 +68,26 @@ namespace MSClases.Services
             }
         }
 
+        public Task<bool> DeleteClaseProfesor(string Ci)
+        {
+            try
+            {
+                var listaClasePorProfesor = _db.ClaseProfesors.Where(cp => cp.Ci == Ci).ToArray();
+                if (listaClasePorProfesor != null && listaClasePorProfesor.Length != 0)
+                {                    
+                    _db.ClaseProfesors.RemoveRange(listaClasePorProfesor);
+                    _db.SaveChanges();
+                    return Task.FromResult(true);
+                }
+
+                return Task.FromResult(false);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+        }
+
         public Task<List<Clase>> GetClasesByProfesor(string ci)
         {
             var clases = (from c in _db.Clases
@@ -75,6 +95,13 @@ namespace MSClases.Services
                           on c.Id equals cp.IdClase
                           where cp.Ci == ci select c).ToList();
             return Task.FromResult(clases);
+        }
+
+        public Task<List<Clase>> GetClasesNotAsinadasAProfesor(string ci)
+        {
+            var clasesAsigandas = GetClasesByProfesor(ci).Result.Select(c => c.Id).ToList();
+            var clasesSinAsignar = (from c in _db.Clases where !clasesAsigandas.Contains(c.Id) select c).ToList();
+            return Task.FromResult(clasesSinAsignar);
         }
     }
 }
