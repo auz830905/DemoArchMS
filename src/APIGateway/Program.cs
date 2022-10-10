@@ -1,4 +1,5 @@
 using APIGateway.Agregators;
+using APIGateway.Handles;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -11,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
+
+//builder.Services.AddOcelot()
+//    .AddDelegatingHandler<NoEncodingHandler>(true);
 
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();
