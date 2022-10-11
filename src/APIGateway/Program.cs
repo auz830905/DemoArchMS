@@ -6,6 +6,12 @@ using Ocelot.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+IConfiguration Configuration = builder.Configuration;
+
+builder.Host.ConfigureLogging(logging => {
+    logging.ClearProviders();
+    logging.AddConsole();
+});
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -14,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 //builder.Services.AddOcelot()
-//    .AddDelegatingHandler<NoEncodingHandler>(true);
+  //  .AddDelegatingHandler<NoEncodingHandler>(true);
 
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();

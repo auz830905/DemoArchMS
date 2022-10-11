@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app-api-gateway
-          image: api_ms_profesores:latest
+          image: api_gateway:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -40,7 +40,7 @@ metadata:
 spec:
   ports:
     - name: app-api-gateway
-      port: 80      
+      port: 80     
       nodePort: 30461
   type: NodePort   
   selector:

@@ -2,7 +2,7 @@
 {
     public static class Endpoints
     {
-        private static string BaseUrl = "https://192.168.49.2:30461";
+        private static string BaseUrl = "http://192.168.49.2:30461";
 
         public static string ProfesoresList = $"{BaseUrl}/gateway/profesores";
         public static string Profesor = $"{BaseUrl}/gateway/profesores/";

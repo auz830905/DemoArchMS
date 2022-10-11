@@ -40,7 +40,7 @@ metadata:
 spec:
   ports:
     - name: app-ms-profesores
-      port: 80      
+      port: 80     
       nodePort: 30463
   type: NodePort   
   selector:

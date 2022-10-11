@@ -11,10 +11,10 @@
       "UpstreamPathTemplate": "/gateway/clases/{Id}",
       "DownstreamPathTemplate": "/api/clases/{Id}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
+          "Host": "192.168.49.2",
           "Port": 30462
         }
       ],
@@ -30,10 +30,10 @@
       "UpstreamPathTemplate": "/gateway/clases",
       "DownstreamPathTemplate": "/api/clases",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
+          "Host": "192.168.49.2",
           "Port": 30462
         }
       ],
@@ -43,10 +43,10 @@
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}",
       "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
+          "Host": "192.168.49.2",
           "Port": 30462
         }
       ],
@@ -56,10 +56,10 @@
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/clasesnotassign",
       "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}/clasesnotassign",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
+          "Host": "192.168.49.2",
           "Port": 30462
         }
       ],
@@ -69,10 +69,10 @@
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/{IdClase}",
       "DownstreamPathTemplate": "/api/clasesprofesores/{Ci}/{IdClase}",
       "UpstreamHttpMethod": [ "Post", "Delete" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
+          "Host": "192.168.49.2",
           "Port": 30462
         }
       ],
@@ -82,11 +82,11 @@
       "UpstreamPathTemplate": "/gateway/profesores/{Ci}",
       "DownstreamPathTemplate": "/api/profesores/{Ci}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
-          "Port": 7261
+          "Host": "192.168.49.2",
+          "Port": 30463
         }
       ],
       "Key": "profesor_by_id"
@@ -95,17 +95,17 @@
       "UpstreamPathTemplate": "/gateway/profesores",
       "DownstreamPathTemplate": "/api/profesores",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-      "DownstreamSCheme": "https",
+      "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://192.168.49.2",
-          "Port": 7261
+          "Host": "192.168.49.2",
+          "Port": 30463
         }
       ],
       "Key": "profesores"
     }    
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://192.168.49.2:30461"
+    "BaseUrl": "http://192.168.49.2:30461"
   }
 }
