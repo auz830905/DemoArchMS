@@ -6,20 +6,83 @@ namespace MSProfesores.Extensions
 {
 	internal static class EndPointExtensions
 	{
-		internal static void AddEndPointsProfesoresExtension(this WebApplication app)
+        #region EndPoints
+        internal static void AddEndPointsProfesoresExtension(this WebApplication app)
 		{
-            app.MapGet("/api/profesores/{Ci}", async (IProfesoresRepository repository, string Ci) =>
+            app.MapGet("/api/profesores/{Ci}", ObtenerProfesor)            
+            .WithName("GetProfesorByCI")
+            .WithTags("ObtenerProfesor")
+            //.RequireAuthorization()
+            .ProducesValidationProblem(400)
+            //.Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces<Profesor>(StatusCodes.Status200OK);
+
+            app.MapGet("/api/profesores", ListarProfesores) 
+            .WithName("GetProfesores")
+            .WithTags("ListarProfesores")
+            //.RequireAuthorization()    
+            //.Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces<List<Profesor>>(StatusCodes.Status200OK);
+
+            app.MapPost(pattern: "/api/profesores", InsertProfesor)
+            .WithName("PostProfesor")
+            .WithTags("AgregarProfesor")
+            //.RequireAuthorization()
+            .ProducesValidationProblem(400)
+            //.Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status204NoContent)
+            .Produces<Profesor>(StatusCodes.Status200OK);           
+
+            app.MapDelete("/api/profesores/{Ci}", EliminarProfesor) 
+            .WithName("DeleteProfesor")
+            .WithTags("EliminarProfesor")
+            //.RequireAuthorization()
+            .ProducesValidationProblem(400)
+            //.Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces<Profesor>(StatusCodes.Status200OK);
+
+            app.MapPut("/api/profesores", ActualizarProfesor)
+            .WithName("UpdateProfesor")
+            .WithTags("ActualizarProfesor")
+            //.RequireAuthorization()
+            .ProducesValidationProblem(400)
+            //.Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces<Profesor>(StatusCodes.Status200OK);
+        }
+        #endregion
+
+        #region Methods
+        private static async Task<IResult> ObtenerProfesor(string Ci, IProfesoresRepository repository, ILogger<IProfesoresRepository> logger)
+        {
+            try
             {
-                var profesor = await repository.GetProfesor(Ci);
+                if (!ValidateCI(Ci))
+                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
 
-                if (profesor != null)
-                    return Results.Ok(profesor);
+                var result = await repository.GetProfesor(Ci);
 
-                return Results.NotFound();
-            })
-            .WithName("GetProfesorByCI");
+                if (!string.IsNullOrEmpty(result?.CI))
+                    return Results.Ok(result);
 
-            app.MapGet("/api/profesores", async (IProfesoresRepository repository) =>
+                return Results.NotFound($"Profesor que desea recuperar con CI = '{Ci}' no existe");
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogCritical(ex, "500 Internal server error");
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            }
+        }
+        private static async Task<IResult> ListarProfesores(IProfesoresRepository repository, ILogger<IProfesoresRepository> logger)
+        {
+            try
             {
                 var profesores = await repository.GetProfesores();
 
@@ -27,35 +90,95 @@ namespace MSProfesores.Extensions
                     return Results.Ok(profesores);
 
                 return Results.NoContent();
-            })
-            .WithName("GetProfesores");
-
-            app.MapPost("/api/profesores", async (IProfesoresRepository repository, [FromBody] Profesor profesor) =>
+            }
+            catch (Exception ex)
             {
-                var result = await repository.AddProfesor(profesor);
-                if (result)
-                    return Results.NoContent();
+
+                logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
-            })
-            .WithName("PostProfesor");
-
-            app.MapDelete("/api/profesores/{Ci}", async (IProfesoresRepository repository, string Ci) =>
+            }
+        }
+        private static async Task<IResult> ActualizarProfesor(Profesor profesor, IProfesoresRepository repository, ILogger<IProfesoresRepository> logger)
+        {
+            try
             {
-                var result = await repository.DeleteProfesor(Ci);
-                if (result)
-                    return Results.NoContent();
-                return Results.Problem(statusCode: 500, title: "Internal error");
-            })
-            .WithName("DeleteProfesor");
+                if (!ValidateCI(profesor.CI))
+                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
 
-            app.MapPut("/api/profesores", async (IProfesoresRepository repository, [FromBody] Profesor profesor) =>
-            {
+                if (!ValidateModel(profesor))
+                    return Results.BadRequest("El nombre y apellidos son requeridos");
+
                 var result = await repository.UpdateProfesor(profesor);
-                return Results.Ok(result);
-            })
-            .WithName("UpdateProfesor");
+
+                if (!string.IsNullOrEmpty(result.CI))
+                    return Results.Ok(result);
+
+                return Results.NotFound($"Profesor que desea actualizar con CI = '{profesor.CI}' no existe");
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogCritical(ex, "500 Internal server error");
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            }
+        }
+        private static async Task<IResult> EliminarProfesor(string Ci, IProfesoresRepository repository, ILogger<IProfesoresRepository> logger)
+        {
+            try
+            {
+                if (!ValidateCI(Ci))
+                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
+
+                var result = await repository.DeleteProfesor(Ci);
+
+                if (!string.IsNullOrEmpty(result.CI))
+                    return Results.Ok(result);
+
+                return Results.NotFound($"El Profesor que desea eliminar con CI = '{Ci}', no existe");
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogCritical(ex, "500 Internal server error");
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            }
+        }
+        private static async Task<IResult> InsertProfesor(Profesor profesor, IProfesoresRepository repository, ILogger<IProfesoresRepository> logger)
+        {
+            try
+            {
+                if (!ValidateCI(profesor.CI))
+                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
+
+                if (!ValidateModel(profesor))
+                    return Results.BadRequest("El nombre y apellidos son requeridos");
+
+                var result = await repository.AddProfesor(profesor);
+                return Results.Ok(result);                
+            }
+            catch (Exception ex)
+            {
+
+                logger.LogCritical(ex, "500 Internal server error");
+                return Results.Problem(statusCode: 500, title: "Internal error");
+            }          
         }
 
+        #endregion
+        private static bool ValidateModel(Profesor profe)
+        {
+            if (profe == null)
+                return false;
+            if (string.IsNullOrEmpty(profe.CI))
+                return false;
+            if (profe.CI.Length != 11)
+                return false;
+            if (string.IsNullOrEmpty(profe.Nombre) || string.IsNullOrEmpty(profe.Apellidos))
+                return false;
+            return true;
+        }
+
+        private static bool ValidateCI(string CI) => (CI.Length == 11);        
     }
 }
 

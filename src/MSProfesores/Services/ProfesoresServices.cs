@@ -13,36 +13,23 @@ namespace MSProfesores.Services
             _db = db;
         }
 
-        public Task<bool> AddProfesor(Profesor profesor)
+        public Task<Profesor> AddProfesor(Profesor profesor)
         {
-            try { 
-                _db.Profesores.Add(profesor);
-                _db.SaveChanges();
-                return Task.FromResult(true);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            var profeResponse = _db.Profesores.Add(profesor).Entity;
+            _db.SaveChanges();
+            return Task.FromResult(profeResponse);            
         }
 
-        public Task<bool> DeleteProfesor(string Ci)
-        {
-            try
+        public Task<Profesor> DeleteProfesor(string Ci)
+        {            
+            var profesor = GetProfesor(Ci).Result;
+            if (profesor != null)
             {
-                var profesor = GetProfesor(Ci).Result;
-                if (profesor != null)
-                {
-                    _db.Profesores.Remove(profesor);
-                    _db.SaveChanges();
-                    return Task.FromResult(true);
-                }
-                return Task.FromResult(false);
+                _db.Profesores.Remove(profesor);
+                _db.SaveChanges();
+                return Task.FromResult(profesor);
             }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            return Task.FromResult(new Profesor());            
         }
 
         public Task<Profesor> GetProfesor(string Ci)
@@ -59,9 +46,19 @@ namespace MSProfesores.Services
 
         public Task<Profesor> UpdateProfesor(Profesor profesor)
         {
-            _db.Profesores.Update(profesor);
-            _db.SaveChanges();
-            return Task.FromResult(profesor);
+            var profesorResponse = GetProfesor(profesor.CI).Result;
+
+            if (profesorResponse != null)
+            {
+                profesorResponse.Nombre = profesor.Nombre;
+                profesorResponse.Apellidos = profesor.Apellidos;
+
+                var profesorUdpate = _db.Profesores.Update(profesorResponse).Entity;
+                _db.SaveChanges();
+
+                return Task.FromResult(profesorUdpate);
+            }   
+            return Task.FromResult(new Profesor());
         }
     }
 }
