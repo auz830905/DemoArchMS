@@ -20,7 +20,7 @@ namespace APIGateway.Agregators
             if (profesor != null)
             {
                 profesor.Clases = new List<Clase>();
-                profesor.Clases.AddRange(clases);
+                profesor.Clases.AddRange(clases!);
             }
               
             var postsByUserString = JsonConvert.SerializeObject(profesor);
