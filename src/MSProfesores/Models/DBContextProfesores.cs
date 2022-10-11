@@ -27,6 +27,10 @@ namespace MSProfesores.Models
                 entity.HasKey(e => e.CI)
                     .HasName("PK_CI");
 
+                entity.Property(e => e.CI).HasMaxLength(11);
+                entity.Property(e => e.Nombre).HasMaxLength(100);
+                entity.Property(e => e.Apellidos).HasMaxLength(250);
+
                 entity.ToTable("Profesores");
             });
 

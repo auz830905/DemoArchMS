@@ -2,9 +2,9 @@
 {
 	public class ClaseProfesor
 	{
-		public string Ci { get; set; } 
+		public string Ci { get; set; } = null!;
 		public int IdClase { get; set; }
-		public virtual Clase IdClaseNavigation { get; set; } = null!;
+		public virtual Clase IdClaseNavigation { get; set; }
     }
 }
 
