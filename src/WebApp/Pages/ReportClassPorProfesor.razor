@@ -58,7 +58,7 @@ else
                         <td>@clase.Id</td>
                         <td>@clase.Nombre</td>
                         <td>
-                            <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase, CiSelected))">
+                            <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase, CiSelected!))">
                                 <span class="oi oi-trash"></span>
                             </button>
                         </td>
