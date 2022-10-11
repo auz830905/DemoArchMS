@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSClases.Migrations
 {
     [DbContext(typeof(DBContextClases))]
-    [Migration("20221006130323_initial")]
+    [Migration("20221011195034_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,8 @@ namespace MSClases.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id")
                         .HasName("PK_Clase");
@@ -47,14 +48,10 @@ namespace MSClases.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Ci")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("IdClaseNavigationId")
-                        .HasColumnType("int");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.HasKey("IdClase", "Ci");
-
-                    b.HasIndex("IdClaseNavigationId");
 
                     b.ToTable("ClaseProfesores", (string)null);
                 });
@@ -62,12 +59,17 @@ namespace MSClases.Migrations
             modelBuilder.Entity("MSClases.Models.ClaseProfesor", b =>
                 {
                     b.HasOne("MSClases.Models.Clase", "IdClaseNavigation")
-                        .WithMany()
-                        .HasForeignKey("IdClaseNavigationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("ClaseProfesor")
+                        .HasForeignKey("IdClase")
+                        .IsRequired()
+                        .HasConstraintName("FK_CLASE");
 
                     b.Navigation("IdClaseNavigation");
+                });
+
+            modelBuilder.Entity("MSClases.Models.Clase", b =>
+                {
+                    b.Navigation("ClaseProfesor");
                 });
 #pragma warning restore 612, 618
         }

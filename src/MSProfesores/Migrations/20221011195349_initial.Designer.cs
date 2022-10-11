@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSProfesores.Migrations
 {
     [DbContext(typeof(DBContextProfesores))]
-    [Migration("20221006035814_initial")]
+    [Migration("20221011195349_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,15 +26,18 @@ namespace MSProfesores.Migrations
             modelBuilder.Entity("MSProfesores.Models.Profesor", b =>
                 {
                     b.Property<string>("CI")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Apellidos")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CI")
                         .HasName("PK_CI");

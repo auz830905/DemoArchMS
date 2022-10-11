@@ -14,7 +14,7 @@ namespace MSClases.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,25 +25,18 @@ namespace MSClases.Migrations
                 name: "ClaseProfesores",
                 columns: table => new
                 {
-                    Ci = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IdClase = table.Column<int>(type: "int", nullable: false),
-                    IdClaseNavigationId = table.Column<int>(type: "int", nullable: false)
+                    Ci = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    IdClase = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ClaseProfesores", x => new { x.IdClase, x.Ci });
                     table.ForeignKey(
-                        name: "FK_ClaseProfesores_Clases_IdClaseNavigationId",
-                        column: x => x.IdClaseNavigationId,
+                        name: "FK_CLASE",
+                        column: x => x.IdClase,
                         principalTable: "Clases",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClaseProfesores_IdClaseNavigationId",
-                table: "ClaseProfesores",
-                column: "IdClaseNavigationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
