@@ -10,32 +10,31 @@
 
 <PageTitle>Añadir Profesores</PageTitle>
 
-<h1>Añadir profesor</h1>
-<hr/>
-<br />
-
-<EditForm Model="@profesor" OnSubmit="AddProfesor">
-   @* <DataAnnotationsValidator/>
-    <ValidationSummary />*@
+<EditForm Model="@profesor" OnValidSubmit = "AddProfesor">
+    <DataAnnotationsValidator/>
+    @*<ValidationSummary />*@
 
     <div class="form-group">
-        <label>CI: </label>
+        <label>Carné Identidad: </label>
         <div>
             <InputText @bind-Value="@profesor.CI" class="form-control"/>
+            <ValidationMessage For="@(() => profesor.CI)" />
         </div>
     </div>
 
     <div class="form-group">
         <label>Nombre: </label>
         <div>
-            <InputText @bind-Value="@profesor.Nombre" class="form-control"/>           
+            <InputText @bind-Value="@profesor.Nombre" class="form-control"/>    
+            <ValidationMessage For="@(() => profesor.Nombre)" />
         </div>
     </div>
 
     <div class="form-group">
         <label>Apellidos: </label>
         <div>
-            <InputText @bind-Value="@profesor.Apellidos" class="form-control"/>            
+            <InputText @bind-Value="@profesor.Apellidos" class="form-control"/>
+            <ValidationMessage For="@(() => profesor.Apellidos)" />
         </div>
     </div>
 
@@ -49,6 +48,8 @@
 @code {
     Profesor profesor = new Profesor();
 
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
     private async Task AddProfesor()
     {
         try
@@ -58,7 +59,8 @@
 
             if (response.IsSuccessStatusCode)
             {
-                _navManager.NavigateTo("/profesores");
+
+                await BlazoredModal.CloseAsync(ModalResult.Ok("Ok"));
                 toastService.ShowSuccess("Profesor agregado correctamente");  
             }
             else
@@ -69,7 +71,7 @@
         }
         catch(Exception)
         {
-           toastService.ShowError("Error 500");
+            toastService.ShowError("No se puede establecer conexión con el servidor");
         }
-    }
+    }    
 }

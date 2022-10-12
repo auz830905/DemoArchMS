@@ -1,0 +1,47 @@
+﻿@using global::Shared.DTOs
+@using Static
+@using Newtonsoft.Json; 
+
+@inject HttpClient Http
+@inject NavigationManager _navManager
+@inject IToastService toastService
+
+<PageTitle>Eliminar Profesor</PageTitle>
+
+<EditForm Model="@profesor">    
+    <button class="btn btn-danger" @onclick="@(() => DeleteProfesor())">
+        <span class="oi oi-check"></span>
+        Si
+    </button>
+    <button class="btn btn-secondary" @onclick="@(() => Close())">
+        <span class="oi oi-x"></span>
+        No
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] public Profesor profesor { get; set; }
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected async Task DeleteProfesor()
+    {
+        try
+        {            
+            using var responseDeleteProfesor = await Http.DeleteAsync($"{Endpoints.DeleteProfesor}{profesor.CI}");
+            using var responseDeleteClasesProfesores = await Http.DeleteAsync($"{Endpoints.DeleteClasesProfesor}{profesor.CI}");
+
+            if (responseDeleteProfesor.IsSuccessStatusCode)
+            {
+                await BlazoredModal.CloseAsync(ModalResult.Ok("Ok"));
+                toastService.ShowSuccess("Profesor eliminado correctamente");
+            }            
+        }
+        catch(Exception)
+        {
+            toastService.ShowError("No se puede establecer conexión con el servidor");
+        }
+    }
+
+    private async Task Close() => await BlazoredModal.CloseAsync();
+}
