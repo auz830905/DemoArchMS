@@ -6,6 +6,7 @@
 @inject HttpClient Http
 @inject NavigationManager _navManager
 @inject IJSRuntime js
+@inject IToastService toastService
 
 <PageTitle>Actualizar Clase</PageTitle>
 
@@ -13,14 +14,15 @@
 <hr/>
 <br />
 
-<EditForm Model="@clase" OnSubmit="UpdateClase">
-   @* <DataAnnotationsValidator/>
-    <ValidationSummary />*@
+<EditForm Model="@clase" OnValidSubmit = "UpdateClase">
+    <DataAnnotationsValidator/>
+    @*<ValidationSummary />*@
     
     <div class="form-group">
         <label>Nombre: </label>
         <div>
-            <InputText @bind-Value="@clase!.Nombre" class="form-control"/>           
+            <InputText @bind-Value="@clase!.Nombre" class="form-control"/>    
+            <ValidationMessage For="@(() => clase.Nombre)" />
         </div>
     </div>    
 
@@ -51,7 +53,7 @@
         }
         catch(Exception)
         {
-            
+            toastService.ShowError("No se puede establecer conexión con el servidor");
         }
     }
 }

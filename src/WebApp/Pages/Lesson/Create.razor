@@ -4,6 +4,7 @@
 @using Static
 @inject HttpClient Http
 @inject NavigationManager _navManager
+@inject IToastService toastService
 
 <PageTitle>Añadir Clase</PageTitle>
 
@@ -11,14 +12,15 @@
 <hr/>
 <br />
 
-<EditForm Model="@clase" OnSubmit="AddClase">
-   @* <DataAnnotationsValidator/>
-    <ValidationSummary />*@    
+<EditForm Model="@clase" OnValidSubmit="AddClase">
+    <DataAnnotationsValidator/>
+     @* <ValidationSummary />*@    
 
     <div class="form-group">
         <label>Nombre Clase: </label>
         <div>
-            <InputText @bind-Value="@clase.Nombre" class="form-control"/>           
+            <InputText @bind-Value="@clase.Nombre" class="form-control"/>
+            <ValidationMessage For="@(() => clase.Nombre)" />
         </div>
     </div>
 
@@ -42,7 +44,7 @@
         }
         catch(Exception)
         {
-            
+            toastService.ShowError("No se puede establecer conexión con el servidor");
         }
     }
 }
