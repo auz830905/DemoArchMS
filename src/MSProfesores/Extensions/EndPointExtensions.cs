@@ -64,18 +64,17 @@ namespace MSProfesores.Extensions
             try
             {
                 if (!ValidateCI(Ci))
-                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
+                    return Results.BadRequest(new { StatusCode = 400, Message = "Carné de identidad no válido. Tiene que tener 11 caracteres numéricos" });
 
                 var result = await repository.GetProfesor(Ci);
 
                 if (!string.IsNullOrEmpty(result?.CI))
                     return Results.Ok(result);
 
-                return Results.NotFound($"Profesor que desea recuperar con CI = '{Ci}' no existe");
+                return Results.NotFound(new { StatusCode = 404, Message = $"Profesor que desea recuperar con CI = '{Ci}' no existe" });
             }
             catch (Exception ex)
             {
-
                 logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
             }
@@ -93,7 +92,6 @@ namespace MSProfesores.Extensions
             }
             catch (Exception ex)
             {
-
                 logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
             }
@@ -103,21 +101,20 @@ namespace MSProfesores.Extensions
             try
             {
                 if (!ValidateCI(profesor.CI))
-                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
+                    return Results.BadRequest(new { StatusCode = 400, Message = "Carné de identidad no válido. Tiene que tener 11 caracteres numéricos" });
 
                 if (!ValidateModel(profesor))
-                    return Results.BadRequest("El nombre y apellidos son requeridos");
+                    return Results.BadRequest(new { StatusCode = 400, Message = "El nombre y apellidos son requeridos" });
 
                 var result = await repository.UpdateProfesor(profesor);
 
                 if (!string.IsNullOrEmpty(result.CI))
                     return Results.Ok(result);
 
-                return Results.NotFound($"Profesor que desea actualizar con CI = '{profesor.CI}' no existe");
+                return Results.NotFound(new { StatusCode = 404, Message = $"Profesor que desea actualizar con CI = '{profesor.CI}' no existe" });
             }
             catch (Exception ex)
             {
-
                 logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
             }
@@ -134,11 +131,10 @@ namespace MSProfesores.Extensions
                 if (!string.IsNullOrEmpty(result.CI))
                     return Results.Ok(result);
 
-                return Results.NotFound($"El Profesor que desea eliminar con CI = '{Ci}', no existe");
+                return Results.NotFound(new { StatusCode = 404, Message = $"El Profesor que desea eliminar con CI = '{Ci}', no existe" });
             }
             catch (Exception ex)
             {
-
                 logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
             }
@@ -148,17 +144,17 @@ namespace MSProfesores.Extensions
             try
             {
                 if (!ValidateCI(profesor.CI))
-                    return Results.BadRequest("Carné de identidad no válido. Tiene que tener 11 caracteres numéricos");
+                    return Results.BadRequest(new { StatusCode = 400, Message = "Carné de identidad no válido. Tiene que tener 11 caracteres numéricos" });
 
                 if (!ValidateModel(profesor))
-                    return Results.BadRequest("El nombre y apellidos son requeridos");
+                    return Results.BadRequest(new { StatusCode = 400, Message = "El nombre y apellidos son requeridos" });
 
                 var result = await repository.AddProfesor(profesor);
+
                 return Results.Ok(result);                
             }
             catch (Exception ex)
             {
-
                 logger.LogCritical(ex, "500 Internal server error");
                 return Results.Problem(statusCode: 500, title: "Internal error");
             }          
