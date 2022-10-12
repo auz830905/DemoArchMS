@@ -24,7 +24,7 @@ namespace MSProfesores.Extensions
             .WithTags("ListarProfesores")
             //.RequireAuthorization()    
             //.Produces(StatusCodes.Status401Unauthorized)
-            .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status204NoContent)
             .Produces<List<Profesor>>(StatusCodes.Status200OK);
 
             app.MapPost(pattern: "/api/profesores", InsertProfesor)
@@ -33,7 +33,7 @@ namespace MSProfesores.Extensions
             //.RequireAuthorization()
             .ProducesValidationProblem(400)
             //.Produces(StatusCodes.Status401Unauthorized)
-            .Produces(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status400BadRequest)
             .Produces<Profesor>(StatusCodes.Status200OK);           
 
             app.MapDelete("/api/profesores/{Ci}", EliminarProfesor) 
