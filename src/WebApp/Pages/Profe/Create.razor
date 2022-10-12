@@ -2,8 +2,11 @@
 
 @using global::Shared.DTOs
 @using Static
+@using Newtonsoft.Json; 
+
 @inject HttpClient Http
 @inject NavigationManager _navManager
+@inject IToastService toastService
 
 <PageTitle>Añadir Profesores</PageTitle>
 
@@ -52,11 +55,21 @@
         {
             var postProfesorBody = new { ci = profesor.CI, nombre = profesor.Nombre, apellidos = profesor.Apellidos };            
             using var response = await Http.PostAsJsonAsync($"{Endpoints.AddProfesor}", postProfesorBody);
-            _navManager.NavigateTo("/profesores");
+
+            if (response.IsSuccessStatusCode)
+            {
+                _navManager.NavigateTo("/profesores");
+                toastService.ShowSuccess("Profesor agregado correctamente");  
+            }
+            else
+            {
+                var error = JsonConvert.DeserializeObject<Error>(response.Content.ReadAsStringAsync().Result);
+                toastService.ShowError(error?.Message);  
+            }                      
         }
         catch(Exception)
         {
-            
+           toastService.ShowError("Error 500");
         }
     }
 }
