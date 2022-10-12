@@ -1,4 +1,5 @@
-﻿using Blazored.Toast;
+﻿using Blazored.Modal;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WebApp;
@@ -10,6 +11,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddBlazoredToast();
+
+builder.Services.AddBlazoredModal();
 
 await builder.Build().RunAsync();
 
