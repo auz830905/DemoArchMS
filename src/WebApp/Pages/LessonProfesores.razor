@@ -5,6 +5,7 @@
 
 @inject HttpClient Http
 @inject IJSRuntime js
+@inject IToastService toastService
 
 <PageTitle>Asociar Profesores a Clases</PageTitle>
 
@@ -203,7 +204,7 @@ else
         }
         catch(Exception)
         {
-            
+            toastService.ShowError("No se puede establecer conexión con el servidor");
         }
     }
 }
