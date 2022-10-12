@@ -1,4 +1,5 @@
-﻿using MSClases.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MSClases.Interfaces;
 using MSClases.Models;
 
 namespace MSClases.Services
@@ -12,37 +13,28 @@ namespace MSClases.Services
             _db = db;
 		}
 
-        public Task<bool> AddClase(Clase clase)
+        public Task<Clase> AddClase(Clase clase)
         {
-            try
-            {
-                _db.Clases.Add(clase);
-                _db.SaveChanges();
-                return Task.FromResult(true);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            var claseResponse = _db.Clases.Add(clase).Entity;           
+            _db.SaveChanges();
+            return Task.FromResult(claseResponse);            
         }
 
-        public Task<bool> DeleteClase(int Id)
-        {
-            try
+        public Task<Clase> DeleteClase(int Id)
+        {           
+            var clase = _db.Clases.Include(c => c.ClaseProfesor).Where(c => c.Id == Id).FirstOrDefault(); 
+
+            if (clase != null)
             {
-                var clase = GetClase(Id).Result;
-                if (clase != null)
+                foreach (var claseProfesor in clase.ClaseProfesor)
                 {
-                    _db.Clases.Remove(clase);
-                    _db.SaveChanges();
-                    return Task.FromResult(true);
+                    _db.Remove(claseProfesor);
                 }
-                return Task.FromResult(false);
+                _db.Clases.Remove(clase);
+                _db.SaveChanges();
+                return Task.FromResult(clase);
             }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            return Task.FromResult(clase!);           
         }
 
         public Task<Clase> GetClase(int Id)
@@ -59,9 +51,19 @@ namespace MSClases.Services
 
         public Task<Clase> UpdateClase(Clase clase)
         {
-            _db.Clases.Update(clase);
-            _db.SaveChanges();
-            return Task.FromResult(clase);
+            var claseResponse = GetClase(clase.Id).Result;
+
+            if (claseResponse != null)
+            {
+                claseResponse.Nombre = clase.Nombre;
+                
+                var claseUpdate = _db.Clases.Update(claseResponse).Entity;
+                _db.SaveChanges();
+
+                return Task.FromResult(claseUpdate);
+            }
+            
+            return Task.FromResult(claseResponse!);
         }
     }
 }

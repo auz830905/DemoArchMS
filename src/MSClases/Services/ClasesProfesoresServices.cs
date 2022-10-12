@@ -12,80 +12,60 @@ namespace MSClases.Services
             _db = db;
         }
 
-        public Task<bool> AddProfesorAClase(string Ci, int IdClase)
+        public Task<ClaseProfesor> AddProfesorAClase(string Ci, int IdClase)
         {
-            try
-            {
-                var clase = _db.Clases.FirstOrDefault(c => c.Id == IdClase);
+            ClaseProfesor? claseProfesor = null;
 
-                if (clase != null)
+            var clase = _db.Clases.FirstOrDefault(c => c.Id == IdClase);
+
+            if (clase != null)
+            {
+                claseProfesor = new ClaseProfesor()
                 {
-                    var claseProfesor = new ClaseProfesor()
-                    {
-                        IdClase = IdClase,
-                        Ci = Ci,
-                        IdClaseNavigation = clase
-                    };
+                    IdClase = IdClase,
+                    Ci = Ci,
+                    IdClaseNavigation = clase
+                };               
+                
+                var claseProfesorResposnse = _db.ClaseProfesors.Add(claseProfesor).Entity;
+                _db.SaveChanges();
 
-                    _db.ClaseProfesors.Add(claseProfesor);
-                    _db.SaveChanges();
-                    return Task.FromResult(true);
-                }
+                return Task.FromResult(claseProfesorResposnse);
+            }
 
-                return Task.FromResult(false);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            return Task.FromResult(claseProfesor!);           
         }
 
-        public Task<bool> DeleteClaseProfesor(string Ci, int IdClase)
+        public Task<ClaseProfesor> DeleteClaseProfesor(string Ci, int IdClase)
         {
-            try
+            ClaseProfesor? clase = null;
+
+            clase = _db.ClaseProfesors.FirstOrDefault(c => c.IdClase == IdClase && c.Ci == Ci);
+
+            if (clase != null)
             {
-                var clase = _db.Clases.FirstOrDefault(c => c.Id == IdClase);
+                var claseProfesorResponse =  _db.ClaseProfesors.Remove(clase).Entity;
+                _db.SaveChanges();
 
-                if (clase != null)
-                {
-                    var claseProfesor = new ClaseProfesor()
-                    {
-                        Ci = Ci,
-                        IdClase = IdClase,
-                        IdClaseNavigation = clase
-                    };
-
-                    _db.ClaseProfesors.Remove(claseProfesor);
-                    _db.SaveChanges();
-                    return Task.FromResult(true);
-                }
+                return Task.FromResult(claseProfesorResponse);
+            }
        
-                return Task.FromResult(false);
-            }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+            return Task.FromResult(clase!);           
         }
 
         public Task<bool> DeleteClaseProfesor(string Ci)
-        {
-            try
-            {
-                var listaClasePorProfesor = _db.ClaseProfesors.Where(cp => cp.Ci == Ci).ToArray();
-                if (listaClasePorProfesor != null && listaClasePorProfesor.Length != 0)
-                {                    
-                    _db.ClaseProfesors.RemoveRange(listaClasePorProfesor);
-                    _db.SaveChanges();
-                    return Task.FromResult(true);
-                }
+        {           
+            var listaClasePorProfesor = _db.ClaseProfesors.Where(cp => cp.Ci == Ci).ToList();
 
-                return Task.FromResult(false);
+            if (listaClasePorProfesor != null && listaClasePorProfesor.Count != 0)
+            {                    
+                _db.ClaseProfesors.RemoveRange(listaClasePorProfesor);
+                _db.SaveChanges();    
+                
+                return Task.FromResult(true);
             }
-            catch (Exception)
-            {
-                return Task.FromResult(false);
-            }
+
+            return Task.FromResult(false);            
         }
 
         public Task<List<Clase>> GetClasesByProfesor(string ci)
