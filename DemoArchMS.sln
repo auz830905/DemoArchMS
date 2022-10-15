@@ -66,9 +66,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "src\WebApp\WebApp.csproj", "{AE10F9C0-7315-4DE2-B4FB-FDB448543CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "src\Auth\Auth.csproj", "{BCFCFA17-0A5E-41A4-860A-5E2D4FA0AF2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "src\Auth\Auth.csproj", "{BCFCFA17-0A5E-41A4-860A-5E2D4FA0AF2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSUsers", "src\MSUsers\MSUsers.csproj", "{FAD1D8E7-D774-44C5-A5E8-E41F04893966}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSUsers", "src\MSUsers\MSUsers.csproj", "{FAD1D8E7-D774-44C5-A5E8-E41F04893966}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
