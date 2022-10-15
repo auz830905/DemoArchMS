@@ -1,75 +1,86 @@
 ﻿@page "/profesores"
 
+@using System.Net.Http.Headers
+@using System.Net
+@using global::Auth.DTOs
 @using global::Shared.DTOs
 @using Profe
 @using Static
-@using Newtonsoft.Json; 
+@using Newtonsoft.Json
+@using WebApp.Helpers
+@using WebApp.Pages.Auth
 
 @inject NavigationManager _navManager
 @inject HttpClient Http
 @inject IJSRuntime js
 @inject IToastService toastService
 
-<PageTitle>Gestionar Profesores</PageTitle>
+@attribute [Authorize(Roles = "adminprofesores, admin")]
 
-<h1>Gestionar Profesores</h1>
-<hr/>
-<br />
+<AuthorizeView>
+    <Authorized>
+        <PageTitle>Gestionar Profesores</PageTitle>
 
-<button @onclick="@(() => ShowModalAdd())" class="btn btn-primary">
-    <span class="oi oi-plus"></span>
-    Añadir Profesor
-</button>
+        <h1>Gestionar Profesores</h1>
+        <hr/>
+        <br />
 
-<br />
-<br />
+        <button @onclick="@(() => ShowModalAdd())" class="btn btn-primary">
+            <span class="oi oi-plus"></span>
+            Añadir Profesor
+        </button>
 
-@if (profesores == null)
-{
-    <div class="alert alert-info">Cargando Profesores...</div>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Carné Identidad</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (profesores.Count != 0)
-            {
-                @foreach (var profesor in profesores)
-                {
+        <br />
+        <br />
+
+        @if (profesores == null)
+        {
+            <div class="alert alert-info">Cargando Profesores...</div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@profesor.CI</td>
-                        <td>@profesor.Nombre</td>
-                        <td>@profesor.Apellidos</td>
-                        <td>                           
-                             <button class="btn btn-outline-warning" @onclick="@(() => ShowModalUpdate(profesor))">
-                                <span class="oi oi-pencil"></span>
-                            </button>
-                             <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor))">
-                                <span class="oi oi-trash"></span>
-                            </button>
-                        </td>                       
+                        <th>Carné Identidad</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Acciones</th>
                     </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4">
-                        <center><b>No hay datos para mostrar</b></center>
-                    </td>
-                </tr>    
-            }
-         </tbody>
-    </table>
-}
+                </thead>
+                <tbody>
+                    @if (profesores.Count != 0)
+                    {
+                        @foreach (var profesor in profesores)
+                        {
+                            <tr>
+                                <td>@profesor.CI</td>
+                                <td>@profesor.Nombre</td>
+                                <td>@profesor.Apellidos</td>
+                                <td>                           
+                                     <button class="btn btn-outline-warning" @onclick="@(() => ShowModalUpdate(profesor))">
+                                        <span class="oi oi-pencil"></span>
+                                    </button>
+                                     <button class="btn btn-outline-danger" @onclick="@(() => DeleteProfesor(profesor))">
+                                        <span class="oi oi-trash"></span>
+                                    </button>
+                                </td>                       
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                <center><b>No hay datos para mostrar</b></center>
+                            </td>
+                        </tr>    
+                    }
+                 </tbody>
+            </table>
+        }
+    </Authorized>    
+</AuthorizeView>
 
 @code {
     ModalOptions options = new ModalOptions() 
@@ -85,6 +96,15 @@ else
     {
         try
         {
+            Http.DefaultRequestHeaders.Accept.Clear();
+            Http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+           
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            
+            var token = JsonConvert.DeserializeObject<UserToken>(await js.GetFromLocalStorage("TOKENKEY"));
+            
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.Token);
+
             profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");
         }
         catch(Exception)
@@ -126,4 +146,3 @@ else
         await OnInitializedAsync();          
     }
 }
-

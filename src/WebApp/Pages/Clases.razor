@@ -1,75 +1,104 @@
 ﻿@page "/clases"
 
+@using System.Net
+@using System.Net.Http.Headers
+@using Newtonsoft.Json
+@using WebApp.Helpers
+@using global::Auth.DTOs
 @using global::Shared.DTOs
 @using Static
+@using Lesson
+
 @inject HttpClient Http
 @inject IJSRuntime js
 
-<PageTitle>Gestionar Clases</PageTitle>
+@attribute [Authorize(Roles = "adminclases, admin")]
 
-<h1>Gestionar Clases</h1>
-<hr/>
-<br />
+<AuthorizeView>
+    <Authorized>
+        <PageTitle>Gestionar Clases</PageTitle>
 
-<a href="/lesson/create" class="btn btn-primary">
-    <span class="oi oi-plus"></span>
-    Añadir Clase
-</a>
-<br />
-<br />
+        <h1>Gestionar Clases</h1>
+        <hr/>
+        <br />
+        
+        <button @onclick="@(() => ShowModalAdd())" class="btn btn-primary">
+            <span class="oi oi-plus"></span>
+             Añadir Clase
+        </button>
 
-@if (clases == null)
-{
-    <div class="alert alert-info">Cargando Clases...</div>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Identificador</th>
-                <th>Nombre Clase</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (clases.Count != 0)
-            {
-                @foreach (var clase in clases)
-                {
-                <tr>
-                    <td>@clase.Id</td>
-                    <td>@clase.Nombre</td>
-                    <td>
-                        <a class="btn btn-outline-warning" href='/lesson/update/@clase.Id'>
-                          <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase))">
-                            <span class="oi oi-trash"></span>
-                        </button>
-                    </td>
-                </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="3">
-                        <center><b>No hay datos para mostrar</b></center>
-                    </td>
-                </tr>     
-            }
-        </tbody>
-    </table>
-}
+        <br />
+        <br />
 
+        @if (clases == null)
+        {
+            <div class="alert alert-info">Cargando Clases...</div>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Nombre Clase</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (clases.Count != 0)
+                    {
+                        @foreach (var clase in clases)
+                        {
+                        <tr>
+                            <td>@clase.Id</td>
+                            <td>@clase.Nombre</td>
+                            <td>
+                                <button class="btn btn-outline-warning" @onclick="@(() => ShowModalUpdate(clase))">
+                                    <span class="oi oi-pencil"></span>
+                                </button>
+                                <button class="btn btn-outline-danger" @onclick="@(() => DeleteClase(clase))">
+                                    <span class="oi oi-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3">
+                                <center><b>No hay datos para mostrar</b></center>
+                            </td>
+                        </tr>     
+                    }
+                </tbody>
+            </table>
+        }
+    </Authorized>
+</AuthorizeView>
 @code {
+    ModalOptions options = new ModalOptions() 
+    { 
+        DisableBackgroundCancel = true 
+    };
+
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+
     private List<Clase>? clases;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+            Http.DefaultRequestHeaders.Accept.Clear();
+            Http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            
+            var token = JsonConvert.DeserializeObject<UserToken>(await js.GetFromLocalStorage("TOKENKEY"));
+            
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.Token);
+
             clases = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesList}");
         }
         catch(Exception)
@@ -78,22 +107,36 @@ else
         }
     }
 
+    protected async Task ShowModalAdd()
+    {
+        var addProfesor = Modal.Show<Create>("Añadir Clase", options: options);
+        var result = await addProfesor.Result;
+
+        if (result.Confirmed)
+        {
+            await OnInitializedAsync();
+        }       
+    }   
+
     protected async Task DeleteClase(Clase clase)
     {
-        try
-        {
-            var confirm = await js.InvokeAsync<bool>("confirm", $"Desea eliminar la clase de {clase.Nombre}?");
-            if (confirm)
-            {
-                var url = $"{Endpoints.DeleteClase}{clase.Id}";
-                await Http.DeleteAsync(url);
-                await OnInitializedAsync();  
-            }              
-        }
-        catch(Exception e)
-        {
-            await OnInitializedAsync();    
-        }
+         var parameters = new ModalParameters()
+        .Add(nameof(Update.clase), clase);
+
+        var deleteClase = Modal.Show<Delete>($"Desea eliminar la clase {clase.Nombre}", parameters, options);
+        var result = await deleteClase.Result;
+
+        await OnInitializedAsync();    
+    }
+
+    protected async Task ShowModalUpdate(Clase clase)
+    {
+        var parameters = new ModalParameters()
+        .Add(nameof(Update.clase), clase);
+
+        var updateClase = Modal.Show<Update>($"Actualizar clase {clase.Nombre}", parameters, options);
+        var result = await updateClase.Result;
+
+        await OnInitializedAsync();          
     }
 }
-
