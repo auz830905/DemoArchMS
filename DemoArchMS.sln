@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "f_Apps", "f_Apps", "{BE199D
 		k8s.Deployment-AppWeb.yaml = k8s.Deployment-AppWeb.yaml
 		k8s.Deployment-MSClases.yaml = k8s.Deployment-MSClases.yaml
 		k8s.Deployment-MSProfesores.yaml = k8s.Deployment-MSProfesores.yaml
+		k8s.Deployment-MSUsers.yaml = k8s.Deployment-MSUsers.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "a_ConfigMaps", "a_ConfigMaps", "{6FBA6B42-3D5C-4685-A256-81569A04C7A0}"

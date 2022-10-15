@@ -27,6 +27,12 @@ builder.Services.AddDbContext<DBContextClases>(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<DBContextClases>();
+    dataContext.Database.Migrate();
+}
+
 app.UseCors(cors => cors
     .AllowAnyMethod()
     .AllowAnyHeader()

@@ -23,10 +23,16 @@ builder.Services.AddDbContext<DBContextProfesores>(options =>
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextProfesores>(options =>
 //{
-//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));    
+//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 //});
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<DBContextProfesores>();
+    dataContext.Database.Migrate();
+}
 
 app.UseCors(cors => cors
     .AllowAnyMethod()

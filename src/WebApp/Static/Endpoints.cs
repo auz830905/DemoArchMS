@@ -2,7 +2,7 @@
 {
     public static class Endpoints
     {
-        private static readonly string BaseUrl = "https://localhost:7119";
+        private static readonly string BaseUrl = "http://192.168.49.2:30461";
 
         public static readonly string ProfesoresList = $"{BaseUrl}/gateway/profesores";
         public static readonly string Profesor = $"{BaseUrl}/gateway/profesores/";

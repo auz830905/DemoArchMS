@@ -18,13 +18,16 @@
           "Port": 30462
         }
       ],
-      "Key": "clases_by_id" //,
-      //"AuthenticationOptions": {
-      //  "AuthenticationProviderKey": "Bearer"
-      //},
-      //"RouteClaimsRequirement": {
-      //  "UserType": "admin"
-      //}
+      "Key": "clases_by_id",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, admin"
+      },
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/clases",
@@ -37,7 +40,16 @@
           "Port": 30462
         }
       ],
-      "Key": "clases"
+      "Key": "clases",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, admin, adminprofesores"
+      },
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}",
@@ -50,7 +62,13 @@
           "Port": 30462
         }
       ],
-      "Key": "clase_by_profesor"
+      "Key": "clase_by_profesor",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, admin, adminprofesores"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/clasesnotassign",
@@ -63,7 +81,13 @@
           "Port": 30462
         }
       ],
-      "Key": "get_clase_not_assign_profesor"
+      "Key": "get_clase_not_assign_profesor",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, admin"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/clasesprofesores/{Ci}/{IdClase}",
@@ -76,7 +100,13 @@
           "Port": 30462
         }
       ],
-      "Key": "post_clase_profesor"
+      "Key": "post_clase_profesor",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, admin, adminprofesores"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/profesores/{Ci}",
@@ -89,7 +119,13 @@
           "Port": 30463
         }
       ],
-      "Key": "profesor_by_id"
+      "Key": "profesor_by_id",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "adminclases, adminprofesores, admin"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/profesores",
@@ -102,10 +138,42 @@
           "Port": 30463
         }
       ],
-      "Key": "profesores"
-    }    
+      "Key": "profesores",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement": {
+        "Role": "getprofesores, adminprofesores, admin"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/users/login",
+      "DownstreamPathTemplate": "/api/users/login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamSCheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.49.2",
+          "Port": 30464
+        }
+      ],
+      "Key": "users_login"
+    },
+    {
+      "UpstreamPathTemplate": "/singin",
+      "DownstreamPathTemplate": "/api/users",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamSCheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "192.168.49.2",
+          "Port": 30464
+        }
+      ],
+      "Key": "users_register"
+    }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://192.168.49.2:30461"
+    "BaseUrl": "https://192.168.49.2:30461"
   }
 }
