@@ -1,4 +1,5 @@
-﻿using MSClases.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MSClases.Interfaces;
 using MSClases.Models;
 
 namespace MSClases.Services
@@ -16,7 +17,7 @@ namespace MSClases.Services
         {
             ClaseProfesor? claseProfesor = null;
 
-            var clase = _db.Clases.FirstOrDefault(c => c.Id == IdClase);
+            var clase = _db.Clases.IgnoreAutoIncludes().FirstOrDefault(c => c.Id == IdClase);
 
             if (clase != null)
             {
@@ -27,14 +28,12 @@ namespace MSClases.Services
                     IdClaseNavigation = clase
                 };               
                 
-                var claseProfesorResposnse = _db.ClaseProfesors.Add(claseProfesor).Entity;
-                _db.SaveChanges();
-
-                return Task.FromResult(claseProfesorResposnse);
+               _db.ClaseProfesors.Add(claseProfesor);                
+               _db.SaveChanges();               
             }
 
             return Task.FromResult(claseProfesor!);           
-        }
+        }        
 
         public Task<ClaseProfesor> DeleteClaseProfesor(string Ci, int IdClase)
         {
@@ -44,10 +43,8 @@ namespace MSClases.Services
 
             if (clase != null)
             {
-                var claseProfesorResponse =  _db.ClaseProfesors.Remove(clase).Entity;
+                _db.ClaseProfesors.Remove(clase);
                 _db.SaveChanges();
-
-                return Task.FromResult(claseProfesorResponse);
             }
        
             return Task.FromResult(clase!);           
@@ -82,7 +79,6 @@ namespace MSClases.Services
             var clasesAsigandas = GetClasesByProfesor(ci).Result.Select(c => c.Id).ToList();
             var clasesSinAsignar = (from c in _db.Clases where !clasesAsigandas.Contains(c.Id) select c).ToList();
             return Task.FromResult(clasesSinAsignar);
-        }
+        }      
     }
 }
-

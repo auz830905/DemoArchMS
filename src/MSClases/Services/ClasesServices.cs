@@ -18,11 +18,14 @@ namespace MSClases.Services
             var claseResponse = _db.Clases.Add(clase).Entity;           
             _db.SaveChanges();
             return Task.FromResult(claseResponse);            
-        }
+        }        
 
         public Task<Clase> DeleteClase(int Id)
         {           
-            var clase = _db.Clases.Include(c => c.ClaseProfesor).Where(c => c.Id == Id).FirstOrDefault(); 
+            var clase = _db.Clases
+                                .Include(c => c.ClaseProfesor)
+                                .Where(c => c.Id == Id)
+                                .FirstOrDefault(); 
 
             if (clase != null)
             {
@@ -64,7 +67,6 @@ namespace MSClases.Services
             }
             
             return Task.FromResult(claseResponse!);
-        }
+        }       
     }
 }
-
