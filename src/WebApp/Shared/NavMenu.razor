@@ -14,26 +14,42 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Inicio
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="clases">
-                <span class="oi oi-book" aria-hidden="true"></span> Clases
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="profesores">
-                <span class="oi oi-people" aria-hidden="true"></span> Profesores
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="lessonprofesores">
-                <span class="oi oi-spreadsheet" aria-hidden="true"></span> Clases Profesores
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="reportclassporprofesor">
-                <span class="oi oi-bar-chart" aria-hidden="true"></span> Reporte
-            </NavLink>
-        </div>
+        <AuthorizeView Roles="adminclases, admin">
+            <Authorized>                
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="clases">
+                        <span class="oi oi-book" aria-hidden="true"></span> Clases
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>  
+        <AuthorizeView Roles="adminprofesores, admin">
+            <Authorized> 
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="profesores">
+                        <span class="oi oi-people" aria-hidden="true"></span> Profesores
+                    </NavLink>
+                </div>
+                </Authorized>
+        </AuthorizeView>  
+        <AuthorizeView Roles="adminclases, admin">
+            <Authorized>     
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="lessonprofesores">
+                        <span class="oi oi-spreadsheet" aria-hidden="true"></span> Clases Profesores
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>   
+        <AuthorizeView>
+            <Authorized> 
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="reportclassporprofesor">
+                        <span class="oi oi-bar-chart" aria-hidden="true"></span> Reporte
+                    </NavLink>
+                </div>    
+            </Authorized>
+        </AuthorizeView>   
     </nav>
 </div>
 
@@ -47,4 +63,3 @@
         collapseNavMenu = !collapseNavMenu;
     }
 }
-
