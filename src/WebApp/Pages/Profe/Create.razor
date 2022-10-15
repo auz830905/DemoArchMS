@@ -8,11 +8,12 @@
 @inject NavigationManager _navManager
 @inject IToastService toastService
 
+@attribute [Authorize(Roles = "adminprofesores, admin")]
+  
 <PageTitle>Añadir Profesores</PageTitle>
 
 <EditForm Model="@profesor" OnValidSubmit = "AddProfesor">
     <DataAnnotationsValidator/>
-    @*<ValidationSummary />*@
 
     <div class="form-group">
         <label>Carné Identidad: </label>
@@ -44,6 +45,7 @@
         Crear Profesor
     </button>
 </EditForm>
+
 
 @code {
     Profesor profesor = new Profesor();

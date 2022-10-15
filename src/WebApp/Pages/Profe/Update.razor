@@ -9,6 +9,8 @@
 @inject IJSRuntime js
 @inject IToastService toastService
 
+@attribute [Authorize(Roles = "adminprofesores, admin")]
+
 <PageTitle>Actualizar Profesor</PageTitle>
 
 <EditForm Model="@profesor" OnValidSubmit = "UpdateProfesor">

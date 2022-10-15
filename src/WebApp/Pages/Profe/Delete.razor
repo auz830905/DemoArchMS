@@ -6,6 +6,8 @@
 @inject NavigationManager _navManager
 @inject IToastService toastService
 
+@attribute [Authorize(Roles = "adminprofesores, admin")]
+
 <PageTitle>Eliminar Profesor</PageTitle>
 
 <EditForm Model="@profesor">    
@@ -20,7 +22,7 @@
 </EditForm>
 
 @code {
-    [Parameter] public Profesor profesor { get; set; }
+    [Parameter] public Profesor? profesor { get; set; }
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
@@ -28,7 +30,7 @@
     {
         try
         {            
-            using var responseDeleteProfesor = await Http.DeleteAsync($"{Endpoints.DeleteProfesor}{profesor.CI}");
+            using var responseDeleteProfesor = await Http.DeleteAsync($"{Endpoints.DeleteProfesor}{profesor!.CI}");
             using var responseDeleteClasesProfesores = await Http.DeleteAsync($"{Endpoints.DeleteClasesProfesor}{profesor.CI}");
 
             if (responseDeleteProfesor.IsSuccessStatusCode)
