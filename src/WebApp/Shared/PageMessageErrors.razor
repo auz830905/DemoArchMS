@@ -1,0 +1,16 @@
+﻿@if (imageSource is not null)
+{
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="card card my-4 m-md-4">
+            <div class="view mx-auto w-responsive mt-2 mt-md-3 col-8 col-sm-4">
+                <img src="@imageSource" width="90%" height="90%"/>
+            </div>
+            <h2 class="font-family-roboto pink-text text-center ">@message</h2>            
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string message { get; set; }
+    [Parameter] public string imageSource { get; set; }    
+}
