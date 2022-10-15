@@ -8,8 +8,7 @@ data:
    set -e
    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE USER arley WITH PASSWORD 'qwerty';
-    CREATE DATABASE MSClases;
-    GRANT ALL PRIVILEGES ON DATABASE MSClases TO arley;
+    GRANT ALL PRIVILEGES ON DATABASE postgres TO arley;
    EOSQL
 
    

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app-ms-users
-          image: app-ms-users:latest
+          image: api_ms_users:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

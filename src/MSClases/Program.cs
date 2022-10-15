@@ -17,7 +17,7 @@ builder.Services.AddInfraestructure();
 
 builder.Services.AddDbContext<DBContextClases>(options =>
 {
-    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQL"));
+    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnectionPostgreSQL"));
 });
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>
@@ -39,6 +39,12 @@ app.UseCors(cors => cors
     .SetIsOriginAllowed(origin => true)
     .AllowCredentials()
 );
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<DBContextClases>();
+    dataContext.Database.Migrate();
+}
 
 app.ConfigureSwagger();
 app.UseHttpsRedirection();
