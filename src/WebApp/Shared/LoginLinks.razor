@@ -1,0 +1,10 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <span>Hola, @context.User.Identity.Name</span>
+        <a href="logout" class="nav-link btn btn-link">Salir</a>
+    </Authorized>
+    <NotAuthorized>
+        <a href="register" class="nav-link btn btn-link">Registrarse</a>
+        <a href="login" class="nav-link btn btn-link">Autenticarse</a>
+    </NotAuthorized>
+</AuthorizeView>
