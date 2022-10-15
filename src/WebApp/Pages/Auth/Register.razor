@@ -1,0 +1,72 @@
+﻿@page "/register"
+
+@using Newtonsoft.Json
+@using WebApp.Auth
+@using global::Auth.DTOs
+@using Static
+@using global::Shared.DTOs
+
+@inject HttpClient Http
+@inject NavigationManager _navManager
+@inject ILoginService service
+@inject IToastService toastService
+
+<PageTitle>Registrar usuario</PageTitle>
+
+<h1>Registrar usuario</h1>
+
+<EditForm Model="@user" OnValidSubmit="RegisterUser">
+    <DataAnnotationsValidator/>
+
+    <div class="form-group">
+        <label>Correo: </label>
+        <div>
+            <InputText @bind-Value="@user.Email" class="form-control"/>
+            <ValidationMessage For="@(() => user.Email)" />
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label>Contraseña: </label>
+        <div>
+            <InputPassword @bind-Value="@user.Password" class="form-control"/>
+            <ValidationMessage For="@(() => user.Password)" />
+        </div>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">
+        <span class="oi oi-check"></span>
+        Crear usuario
+    </button>
+</EditForm>
+
+@code {
+
+    private UserCredentials user = new UserCredentials();
+
+    private async Task RegisterUser()
+    {
+        try
+        {           
+            using var response = await Http.PostAsJsonAsync($"{Endpoints.UserRegister}", user);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var token = response.Content.ReadAsStringAsync().Result;
+                await service.Login(token!);
+                toastService.ShowSuccess("Usuario registrado correctamente");
+                _navManager.NavigateTo("");
+            }
+            else
+            {
+               var error = JsonConvert.DeserializeObject<Error>(response.Content.ReadAsStringAsync().Result);
+               toastService.ShowError(error?.Message);  
+            }                                      
+        }
+        catch(Exception)
+        {
+               
+        }
+    }
+}

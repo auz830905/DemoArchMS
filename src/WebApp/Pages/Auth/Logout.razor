@@ -1,0 +1,33 @@
+﻿@using global::Auth.DTOs
+@using Static
+@using WebApp.Auth
+@using Newtonsoft.Json; 
+
+@inject HttpClient Http
+@inject NavigationManager _navManager
+@inject ILoginService service
+
+<PageTitle>Salir</PageTitle>
+
+<div class="form-control">
+     <button class="btn btn-danger" @onclick="@(() => LogoutUser())">
+        <span class="oi oi-check"></span>
+        Si
+    </button>
+    <button class="btn btn-secondary" @onclick="@(() => Close())">
+        <span class="oi oi-x"></span>
+        No
+    </button>
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+    protected async Task LogoutUser()
+    {
+        await service.Logout();
+        await BlazoredModal.CloseAsync(ModalResult.Ok("Ok"));               
+    }
+
+    private async Task Close() => await BlazoredModal.CloseAsync(ModalResult.Cancel("No"));
+}

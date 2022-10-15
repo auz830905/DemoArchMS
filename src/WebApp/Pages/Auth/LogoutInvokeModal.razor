@@ -1,0 +1,39 @@
+﻿@page "/logout";
+
+@inject NavigationManager _navManager
+@inject IToastService toastService
+
+@if (imageSource is not null)
+{        
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="card card my-4 m-md-4" style="margin-top: 9rem !important;">
+            <div class="view mx-auto w-responsive mt-2 mt-md-3 col-8 col-sm-4">
+                <img src="@imageSource" width="90%" height="90%"/>
+            </div>
+            <h2 class="font-family-roboto pink-text text-center">Esta a punto de salir del sistema</h2>            
+        </div>
+    </div>
+}
+
+@code {
+    ModalOptions options = new ModalOptions() 
+    { 
+        DisableBackgroundCancel = true 
+    };
+    private string? imageSource;
+   
+    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        imageSource = $"image/discconect.png";
+        var logout = Modal.Show<Logout>($"Desea salir del sistema?", options);
+        var result = await logout.Result;
+
+        if (result.Confirmed)
+        {
+            toastService.ShowSuccess("El usuario ha salido del sistema exitosamente");            
+        }          
+        _navManager.NavigateTo("");
+    }  
+}
