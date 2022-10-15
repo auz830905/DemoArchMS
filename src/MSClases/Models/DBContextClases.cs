@@ -4,14 +4,10 @@ namespace MSClases.Models
 {
 	public partial class DBContextClases : DbContext
     {
-		public DBContextClases()
-		{
-		}
+		public DBContextClases(){}
 
         public DBContextClases(DbContextOptions<DBContextClases> options)
-            : base(options)
-        {
-        }
+            : base(options){}
 
         public virtual DbSet<Clase> Clases { get; set; } = null!;
         public virtual DbSet<ClaseProfesor> ClaseProfesors { get; set; } = null!;
@@ -45,20 +41,11 @@ namespace MSClases.Models
             modelBuilder.Entity<ClaseProfesor>(entity =>
             {
                 entity.ToTable("ClaseProfesores");
-
-                /*entity.HasMany(d => d.IdClaseNavigation)
-                    .WithMany(p => p.Id)
-                    .HasForeignKey(d => d.IdPlayer)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PLAYERTRANSACTION_PLAYER");*/
-
             });
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
     }
 }
-

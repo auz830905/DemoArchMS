@@ -173,8 +173,6 @@ namespace MSProfesores.Extensions
                 return false;
             return true;
         }
-
         private static bool ValidateCI(string CI) => (CI.Length == 11);        
     }
 }
-

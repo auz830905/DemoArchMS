@@ -14,4 +14,3 @@ namespace MSClases.Models
 		public virtual ICollection<ClaseProfesor> ClaseProfesor { get; set; } = new HashSet<ClaseProfesor>();
 	}
 }
-

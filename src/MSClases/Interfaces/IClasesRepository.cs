@@ -11,4 +11,3 @@ namespace MSClases.Interfaces
         Task<Clase> UpdateClase(Clase clase);
     }
 }
-

@@ -4,19 +4,12 @@ namespace MSProfesores.Models
 {
 	public partial class DBContextProfesores : DbContext
 	{
-		public DBContextProfesores()
-		{
-		}
+		public DBContextProfesores(){}
 
         public DBContextProfesores(DbContextOptions<DBContextProfesores> options)
-            : base(options)
-        {
-        }
+            : base(options){}
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-
-        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){}
 
         public virtual DbSet<Profesor> Profesores { get; set; } = null!;
 
@@ -36,8 +29,6 @@ namespace MSProfesores.Models
 
             OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
-

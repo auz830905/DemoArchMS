@@ -27,7 +27,6 @@ namespace MSProfesores.Extensions
 
         internal static void AddInfraestructure(this IServiceCollection services)
         {
-
             #region Repositories
 
             services.AddScoped<IProfesoresRepository, ProfesoresServices>();
@@ -36,4 +35,3 @@ namespace MSProfesores.Extensions
         }
     }
 }
-
