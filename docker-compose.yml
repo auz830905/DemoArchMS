@@ -16,6 +16,11 @@ services:
     build:
       context: .
       dockerfile: src/MSProfesores/Dockerfile
+  msusers:
+    image: api_ms_users
+    build:
+      context: .
+      dockerfile: src/MSUsers/Dockerfile
   appweb:
     image: app_web_blazor
     build:
