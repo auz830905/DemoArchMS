@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-ms-users-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-ms-users
+  template:
+    metadata:
+      labels:
+        app: app-ms-users
+    spec:
+      containers:
+        - name: app-ms-users
+          image: app-ms-users:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 30464
+              protocol: TCP
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"          
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: Development
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: app-ms-users-service
+  labels:
+    app: app-ms-users
+spec:
+  ports:
+    - name: app-ms-users
+      port: 80     
+      nodePort: 30464
+  type: NodePort   
+  selector:
+    app: app-ms-users
