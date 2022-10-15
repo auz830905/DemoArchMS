@@ -2,7 +2,7 @@
 {
     public static class Endpoints
     {
-        private static readonly string BaseUrl = "http://192.168.49.2:30461";
+        private static readonly string BaseUrl = "https://localhost:7119";
 
         public static readonly string ProfesoresList = $"{BaseUrl}/gateway/profesores";
         public static readonly string Profesor = $"{BaseUrl}/gateway/profesores/";
@@ -20,5 +20,8 @@
         public static readonly string ClasesByProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
         public static readonly string AddClaseProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
         public static readonly string DeleteClasesProfesor = $"{BaseUrl}/gateway/clasesprofesores/";
+
+        public static readonly string UserRegister = $"{BaseUrl}/singin";
+        public static readonly string UserLogin = $"{BaseUrl}/gateway/users/login";
     }
 }
