@@ -10,6 +10,8 @@
     <link href="css/app.css" rel="stylesheet" />
     <link href="css/custom-style-app.css" rel="stylesheet" />
     <link href="WebApp.styles.css" rel="stylesheet" />
+    <!--Load css for spinner-->
+    <link href="css/loader.css" rel="stylesheet" />
     <!--Add css to toast Notification-->
     <link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
     <!--Add css to Modal-->
@@ -17,7 +19,18 @@
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">       
+        <div class="loading-page">
+            <div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>            
+        </div> 
+    </div>
 
     <div id="blazor-error-ui">
         An unhandled error has occurred.
