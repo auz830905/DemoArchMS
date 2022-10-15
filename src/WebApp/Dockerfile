@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 COPY src/Shared/Shared.csproj src/Shared/
+COPY src/Auth/Auth.csproj src/Auth/
 COPY src/WebApp/WebApp.csproj src/WebApp/
 
 RUN dotnet restore src/WebApp/WebApp.csproj
