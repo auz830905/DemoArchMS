@@ -1,7 +1,11 @@
 using APIGateway.Agregators;
-using APIGateway.Handles;
+using APIGateway.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Ocelot.Authorization;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +23,22 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 
-//builder.Services.AddOcelot()
-  //  .AddDelegatingHandler<NoEncodingHandler>(true);
+builder.Services.AddAuthorizationCore();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(
+    options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:secret"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();
@@ -39,9 +57,25 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
 app.UseAuthentication();
 
-app.UseOcelot().Wait();
+var configration = new OcelotPipelineConfiguration
+{
+    AuthorizationMiddleware = async (ctx, next) =>
+    {
+        if (OcelotJwtMiddleware.Authorize(ctx))
+        {
+            await next.Invoke();
+        }
+        else
+        {
+            ctx.Items.SetError(new UnauthorizedError($"Fail to authorize"));
+        }
+    }
+};
+
+app.UseOcelot(configration).Wait();
 
 app.MapControllers();
 
