@@ -1,5 +1,6 @@
 ﻿@page "/lesson/update/{id}"
 
+@using Newtonsoft.Json
 @using global::Shared.DTOs
 @using Static
 
@@ -8,12 +9,9 @@
 @inject IJSRuntime js
 @inject IToastService toastService
 
+@attribute [Authorize(Roles = "adminclases, admin")]
+
 <PageTitle>Actualizar Clase</PageTitle>
-
-<h1>Actualizar clase</h1>
-<hr/>
-<br />
-
 <EditForm Model="@clase" OnValidSubmit = "UpdateClase">
     <DataAnnotationsValidator/>
     @*<ValidationSummary />*@
@@ -34,14 +32,9 @@
 </EditForm>
 
 @code {
-    [Parameter] 
-    public string id { get; set; }
-    protected Clase clase = new Clase();
+    [Parameter] public Clase clase { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        clase = await Http.GetFromJsonAsync<Clase>($"{Endpoints.Clase}{id}");     
-    }
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
     private async Task UpdateClase()
     {
@@ -49,11 +42,21 @@
         {
             var url = $"{Endpoints.UpdateClase}";
             using var response = await Http.PutAsJsonAsync(url, clase);
-            _navManager.NavigateTo("/clases");
+
+            if (response.IsSuccessStatusCode)
+            {
+               await BlazoredModal.CloseAsync(ModalResult.Ok("Ok"));
+               toastService.ShowSuccess("Clase actualizado correctamente");  
+            }
+            else
+            {
+                var error = JsonConvert.DeserializeObject<Error>(response.Content.ReadAsStringAsync().Result);
+                toastService.ShowError(error?.Message);  
+            }              
         }
         catch(Exception)
         {
             toastService.ShowError("No se puede establecer conexión con el servidor");
         }
-    }
+    }    
 }

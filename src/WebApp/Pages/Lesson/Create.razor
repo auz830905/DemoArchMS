@@ -1,20 +1,19 @@
 ﻿@page "/lesson/create"
 
+@using Newtonsoft.Json
 @using global::Shared.DTOs
 @using Static
 @inject HttpClient Http
 @inject NavigationManager _navManager
 @inject IToastService toastService
 
-<PageTitle>Añadir Clase</PageTitle>
+@attribute [Authorize(Roles = "adminclases, admin")]
 
-<h1>Añadir Clase</h1>
-<hr/>
-<br />
+<PageTitle>Añadir Clase</PageTitle>
 
 <EditForm Model="@clase" OnValidSubmit="AddClase">
     <DataAnnotationsValidator/>
-     @* <ValidationSummary />*@    
+        @* <ValidationSummary />*@    
 
     <div class="form-group">
         <label>Nombre Clase: </label>
@@ -34,17 +33,30 @@
 @code {
     Clase clase = new Clase();
 
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
     private async Task AddClase()
     {
         try
         {
-            var postClaseBody = new { nombre = clase.Nombre };           
-            using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClase}", postClaseBody);
-            _navManager.NavigateTo("/clases");
+            var postClaseBody = new { nombre = clase.Nombre };                
+            using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClase}", postClaseBody );
+
+            if (response.IsSuccessStatusCode)
+            {
+
+                await BlazoredModal.CloseAsync(ModalResult.Ok("Ok"));
+                toastService.ShowSuccess("Clase agregada correctamente");  
+            }
+            else
+            {
+                var error = JsonConvert.DeserializeObject<Error>(response.Content.ReadAsStringAsync().Result);
+                toastService.ShowError(error?.Message);  
+            }                      
         }
         catch(Exception)
         {
             toastService.ShowError("No se puede establecer conexión con el servidor");
         }
-    }
+    } 
 }
