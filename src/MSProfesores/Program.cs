@@ -26,13 +26,13 @@ builder.Services.AddDbContext<DBContextProfesores>(options =>
 //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 //});
 
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<DBContextProfesores>();
-    dataContext.Database.Migrate();
+    //dataContext.Database.Migrate();
+    dataContext.Database.EnsureCreated();
 }
 
 app.UseCors(cors => cors

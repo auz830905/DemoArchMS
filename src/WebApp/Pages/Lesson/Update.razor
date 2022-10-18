@@ -32,7 +32,7 @@
 </EditForm>
 
 @code {
-    [Parameter] public Clase clase { get; set; }
+    [Parameter] public Clase? clase { get; set; }
 
     [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
 

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using MSClases.Extensions;
 using MSClases.Models;
@@ -30,7 +31,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<DBContextClases>();
-    dataContext.Database.Migrate();
+    //dataContext.Database.Migrate();
+    dataContext.Database.EnsureDeleted();
+    dataContext.Database.EnsureCreated();
 }
 
 app.UseCors(cors => cors
@@ -39,12 +42,6 @@ app.UseCors(cors => cors
     .SetIsOriginAllowed(origin => true)
     .AllowCredentials()
 );
-
-using (var scope = app.Services.CreateScope())
-{
-    var dataContext = scope.ServiceProvider.GetRequiredService<DBContextClases>();
-    dataContext.Database.Migrate();
-}
 
 app.ConfigureSwagger();
 app.UseHttpsRedirection();
