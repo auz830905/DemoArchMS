@@ -25,20 +25,24 @@ builder.Services.AddCors();
 
 builder.Services.AddAuthorizationCore();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(
-    options =>
+var authenticationProviderKey = "IdentityApiKey";
+
+builder.Services.AddAuthentication(a =>
+{
+    a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(authenticationProviderKey, x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:secret"])),
-            ClockSkew = TimeSpan.Zero
-        };
-    });
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:secret"])),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ClasesImpartidasPorUnProfesorAggregator>();
@@ -57,9 +61,6 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-app.UseAuthentication();
-
 var configration = new OcelotPipelineConfiguration
 {
     AuthorizationMiddleware = async (ctx, next) =>
@@ -75,8 +76,13 @@ var configration = new OcelotPipelineConfiguration
     }
 };
 
-app.UseOcelot(configration).Wait();
+app.UseOcelot().Wait();
+/*Si se quiere quitar la protección o transmisión del token de acceso desde la
+ api gateway hacia los micorservicios y solo validar las rutas segun los claims
+basados en roles, es añadir la variable configration al metodo useOcelot*/
 
 app.MapControllers();
+app.UseAuthorization();
+app.UseAuthentication();
 
 app.Run();
