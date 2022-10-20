@@ -20,13 +20,8 @@
       ],
       "Key": "clases_by_id",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, admin"
-      },
-      "HttpHandlerOptions": {
-        "UseTracing": true
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -42,13 +37,8 @@
       ],
       "Key": "clases",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, admin, adminprofesores"
-      },
-      "HttpHandlerOptions": {
-        "UseTracing": true
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -64,10 +54,8 @@
       ],
       "Key": "clase_by_profesor",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, admin, adminprofesores"
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -83,10 +71,8 @@
       ],
       "Key": "get_clase_not_assign_profesor",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, admin"
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -102,10 +88,8 @@
       ],
       "Key": "post_clase_profesor",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, admin, adminprofesores"
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -121,10 +105,8 @@
       ],
       "Key": "profesor_by_id",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "adminclases, adminprofesores, admin"
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -140,10 +122,8 @@
       ],
       "Key": "profesores",
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      },
-      "RouteClaimsRequirement": {
-        "Role": "getprofesores, adminprofesores, admin"
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
       }
     },
     {
@@ -174,6 +154,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://192.168.49.2:30461"
+    "BaseUrl": "http://192.168.49.2:30461"
   }
 }
