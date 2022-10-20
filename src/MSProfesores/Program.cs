@@ -1,4 +1,8 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MSProfesores.Extensions;
 using MSProfesores.Models;
 
@@ -15,6 +19,23 @@ builder.Services.AddCors();
 builder.Services.AddSwaggerExtension();
 builder.Services.AddInfraestructure();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(
+    options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:secret"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddDbContext<DBContextProfesores>(options =>
 {
     var connections = Configuration.GetConnectionString("DefaultConnectionMySQL");
@@ -23,7 +44,7 @@ builder.Services.AddDbContext<DBContextProfesores>(options =>
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextProfesores>(options =>
 //{
-//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
+    //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 //});
 
 var app = builder.Build();
@@ -44,7 +65,8 @@ app.UseCors(cors => cors
 
 app.ConfigureSwagger();
 app.UseHttpsRedirection();
-app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.AddEndPointsProfesoresExtension();
 
