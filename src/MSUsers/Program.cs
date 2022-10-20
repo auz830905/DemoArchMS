@@ -30,7 +30,7 @@ builder.Services.AddDbContext<DBContextUsers>(options =>
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextUsers>(options =>
 //{
-//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
+    //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
 //});
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
