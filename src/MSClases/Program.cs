@@ -38,7 +38,15 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<DBContextClases>(options =>
 {
-    options.UseNpgsql(Configuration.GetConnectionString("DefaultConnectionPostgreSQL"));
+    var host = Configuration.GetValue<string>("ConnectionStrings:host")!.ToString();
+    var port = Configuration.GetValue<string>("ConnectionStrings:port")!.ToString();
+    var database = Configuration.GetValue<string>("ConnectionStrings:database")!.ToString();
+    var user = Configuration.GetValue<string>("ConnectionStrings:user")!.ToString();
+    var password = Configuration.GetValue<string>("ConnectionStrings:password")!.ToString();
+
+    var connectonString = $"Host={host}:{port};Database={database}; Username={user};Password={password}";
+
+    options.UseNpgsql(connectonString);
 });
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>

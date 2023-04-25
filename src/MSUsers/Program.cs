@@ -24,8 +24,15 @@ builder.Services.AddInfraestructure();
 
 builder.Services.AddDbContext<DBContextUsers>(options =>
 {
-    var connections = Configuration.GetConnectionString("DefaultConnectionMySQL");
-    options.UseMySql(connections, ServerVersion.AutoDetect(connections));
+    var host = Configuration.GetValue<string>("ConnectionStrings:host")!.ToString();
+    var port = Configuration.GetValue<string>("ConnectionStrings:port")!.ToString();
+    var database = Configuration.GetValue<string>("ConnectionStrings:database")!.ToString();
+    var user = Configuration.GetValue<string>("ConnectionStrings:user")!.ToString();
+    var password = Configuration.GetValue<string>("ConnectionStrings:password")!.ToString();
+
+    var connectionString = $"server={host}; port={port}; database={database}; user={user}; password={password}; Persist Security Info=False; Connect Timeout=300";
+    
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 //builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextUsers>(options =>
