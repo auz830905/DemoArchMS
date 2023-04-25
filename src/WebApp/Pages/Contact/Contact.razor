@@ -1,0 +1,53 @@
+﻿@page "/contact"
+
+@using Newtonsoft.Json
+@inject HttpClient Http
+@inject NavigationManager _navManager
+@inject IToastService toastService
+
+<PageTitle>Contacto</PageTitle>
+<h1>Contacto</h1>
+<hr />
+<br />
+
+<EditForm Model="@whatsApp" OnValidSubmit="SendSMS">
+    <DataAnnotationsValidator/>
+        @* <ValidationSummary />*@    
+
+    <div class="form-group">
+        <label>Mensaje: </label>
+        <div>
+            <InputText @bind-Value="@whatsApp.sms" class="form-control"/>
+            <ValidationMessage For="@(() => whatsApp.sms)" />
+        </div>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">
+        <span class="oi oi-check"></span>
+        Enviar mensaje
+    </button>
+</EditForm>
+
+@code {
+    class WhatsApp
+    {
+        public string sms { get; set; } = "";
+        public string phone { get; set; } = "5353656158";
+    }
+    WhatsApp whatsApp = new WhatsApp();
+
+    private async Task SendSMS()
+    {
+        try
+        {
+            var url = $"https://api.whatsapp.com/send?phone="+whatsApp.phone+"&text="+whatsApp.sms;
+            var rr = new HttpRequestMessage(HttpMethod.Post, url);
+            using var response = await Http.SendAsync(rr);
+        }
+        catch(Exception e)
+        {
+            toastService.ShowError(e.Message); 
+        }
+    }
+}
