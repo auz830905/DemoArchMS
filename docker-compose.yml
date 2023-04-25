@@ -2,27 +2,27 @@ version: '3.4'
 
 services:
   apigateway:
-    image: api_gateway
+    image: api_gateway:amd64
     build:
       context: .
       dockerfile: src/APIGateway/Dockerfile
   msclases:
-    image: api_ms_clases
+    image: api_ms_clases:amd64
     build:
       context: .
       dockerfile: src/MSClases/Dockerfile
   msprofesores:
-    image: api_ms_profesores
+    image: api_ms_profesores:amd64
     build:
       context: .
       dockerfile: src/MSProfesores/Dockerfile
   msusers:
-    image: api_ms_users
+    image: api_ms_users:amd64
     build:
       context: .
       dockerfile: src/MSUsers/Dockerfile
   appweb:
-    image: app_web_blazor
+    image: app_web_blazor:amd64
     build:
       context: .
       dockerfile: src/WebApp/Dockerfile
