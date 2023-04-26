@@ -9,7 +9,7 @@ namespace MSClases.Extensions
         {
             app.MapGet("/api/clasesprofesores/{Ci}", ListarClasesPorProfesor) 
             .WithName("GetClasesByProfesorId")
-            .WithTags("ObtenerProfesor")
+            .WithTags("Gestión de clases y profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -19,7 +19,7 @@ namespace MSClases.Extensions
 
             app.MapGet("/api/clasesprofesores/{Ci}/clasesnotassign", ListarClasesNoAsiganadasAProfesor) 
             .WithName("GetClasesNotAsignedProfesorId")
-            .WithTags("ObtenerClasesNoAsignadasAProfesor")
+            .WithTags("Gestión de clases y profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -29,7 +29,7 @@ namespace MSClases.Extensions
 
             app.MapPost("/api/clasesprofesores/{Ci}/{IdClase}", AgregarClaseAProfesor)
             .WithName("PostClaseProfesor")
-            .WithTags("EliminarClasesAProfesor")
+            .WithTags("Gestión de clases y profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -39,7 +39,7 @@ namespace MSClases.Extensions
 
             app.MapDelete("/api/clasesprofesores/{Ci}/{IdClase}", EliminarClaseAProfesor) 
             .WithName("DeleteClaseProfesor")
-            .WithTags("EliminarClaseAProfesor")
+            .WithTags("Gestión de clases y profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -49,7 +49,7 @@ namespace MSClases.Extensions
 
             app.MapDelete("/api/clasesprofesores/{Ci}", EliminarTodasLasClaseAProfesor) 
             .WithName("DeleteAllClasesAProfesor")
-            .WithTags("EliminarTodasLasClaseAProfesor")
+            .WithTags("Gestión de clases y profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)

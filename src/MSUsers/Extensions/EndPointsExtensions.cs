@@ -4,7 +4,7 @@ using MSUsers.Interfaces;
 
 namespace MSUsers.Extensions
 {
-    internal static class EndPointsExtensions
+    public static class EndPointsExtensions
     {
         #region EndPoints
         internal static void AddEndPointsUsersExtension(this WebApplication app)
@@ -26,19 +26,19 @@ namespace MSUsers.Extensions
         #endregion
 
         #region Methods
-        private static async Task<IResult> CreateUser(UserCredentials user, IUsersRepository repository, ILogger<IUsersRepository> logger)
+        public static async Task<IResult> CreateUser(UserCredentials user, IUsersRepository repository, ILogger<IUsersRepository> logger)
         {
             try
             {
                 if (!ValidateModel(user))
-                    return Results.BadRequest(new { StatusCode = 400, Message = "El correo y contraseña son requeridos" });
+                    return Results.BadRequest("El correo y contraseña son requeridos");
 
                 var result = await repository.CreateUser(user);
 
                 if (result != null)
                     return Results.Ok(result);
 
-                return Results.BadRequest(new { StatusCode = 400, Message = "Contraseña con un mínimo 8 Caracteres que incluyan mayúsculas, números y caracteres especiales" });
+                return Results.BadRequest("Contraseña con un mínimo 8 Caracteres que incluyan mayúsculas, números y caracteres especiales");
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace MSUsers.Extensions
             }
         }
 
-        private static async Task<IResult> LoginUser([FromBody] UserCredentials user, IUsersRepository repository, ILogger<IUsersRepository> logger)
+        public static async Task<IResult> LoginUser([FromBody] UserCredentials user, IUsersRepository repository, ILogger<IUsersRepository> logger)
         {
             try
             {

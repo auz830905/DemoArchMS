@@ -11,7 +11,7 @@ namespace MSProfesores.Extensions
 		{
             app.MapGet("/api/profesores/{Ci}", ObtenerProfesor)            
             .WithName("GetProfesorByCI")
-            .WithTags("ObtenerProfesor")
+            .WithTags("Gestión de profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -21,7 +21,7 @@ namespace MSProfesores.Extensions
 
             app.MapGet("/api/profesores", ListarProfesores) 
             .WithName("GetProfesores")
-            .WithTags("ListarProfesores")
+            .WithTags("Gestión de profesores")
             .RequireAuthorization()    
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status204NoContent)
@@ -29,7 +29,7 @@ namespace MSProfesores.Extensions
 
             app.MapPost(pattern: "/api/profesores", InsertProfesor)
             .WithName("PostProfesor")
-            .WithTags("AgregarProfesor")
+            .WithTags("Gestión de profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -38,7 +38,7 @@ namespace MSProfesores.Extensions
 
             app.MapDelete("/api/profesores/{Ci}", EliminarProfesor) 
             .WithName("DeleteProfesor")
-            .WithTags("EliminarProfesor")
+            .WithTags("Gestión de profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -48,7 +48,7 @@ namespace MSProfesores.Extensions
 
             app.MapPut("/api/profesores", ActualizarProfesor)
             .WithName("UpdateProfesor")
-            .WithTags("ActualizarProfesor")
+            .WithTags("Gestión de profesores")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)

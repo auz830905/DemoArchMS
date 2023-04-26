@@ -10,7 +10,7 @@ namespace MSClases.Extensions
         {
             app.MapGet("/api/clases/{Id}", ObtenerClase)
             .WithName("GetClasesById")
-            .WithTags("ObtenerClase")
+            .WithTags("Gestión de clases")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -19,7 +19,7 @@ namespace MSClases.Extensions
 
             app.MapGet("/api/clases", ListarClases)
             .WithName("GetClases")
-            .WithTags("ListarClases")
+            .WithTags("Gestión de clases")
             .RequireAuthorization()    
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status204NoContent)
@@ -27,7 +27,7 @@ namespace MSClases.Extensions
 
             app.MapPost("/api/clases", InsertClase)
             .WithName("PostClase")
-            .WithTags("AgregarClase")
+            .WithTags("Gestión de clases")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -36,7 +36,7 @@ namespace MSClases.Extensions
 
             app.MapDelete("/api/clases/{Id}", EliminarClase) 
             .WithName("DeleteClase")
-            .WithTags("EliminarClase")
+            .WithTags("Gestión de clases")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -45,7 +45,7 @@ namespace MSClases.Extensions
 
             app.MapPut("/api/clases", ActualizarClase)
             .WithName("UpdateClase")
-            .WithTags("ActualizarClase")
+            .WithTags("Gestión de clases")
             .RequireAuthorization()
             .ProducesValidationProblem(400)
             .Produces(StatusCodes.Status401Unauthorized)
@@ -86,7 +86,7 @@ namespace MSClases.Extensions
             catch (Exception ex)
             {
                 logger.LogCritical(ex, "500 Internal server error");
-                return Results.Problem(statusCode: 500, title: "Internal error");
+                return Results.StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
         private static async Task<IResult> ActualizarClase(Clase clase, IClasesRepository repository, ILogger<IClasesRepository> logger)
