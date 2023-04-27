@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 volumes:
   postgres_demo_data: {}
@@ -107,4 +107,3 @@ services:
     restart: always
     ports:
       - 8081:8080
-

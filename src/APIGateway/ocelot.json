@@ -133,7 +133,7 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ms-user",
+          "Host": "ms-users",
           "Port": 80
         }
       ],
@@ -146,7 +146,7 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "ms-user",
+          "Host": "ms-users",
           "Port": 80
         }
       ],
