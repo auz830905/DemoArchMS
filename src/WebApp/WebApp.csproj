@@ -9,6 +9,8 @@
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.0.0" />
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
