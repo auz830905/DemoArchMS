@@ -7,6 +7,7 @@
 @inject HttpClient Http
 @inject NavigationManager _navManager
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminprofesores, admin")]
   
@@ -56,8 +57,10 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
             var postProfesorBody = new { ci = profesor.CI, nombre = profesor.Nombre, apellidos = profesor.Apellidos };            
-            using var response = await Http.PostAsJsonAsync($"{Endpoints.AddProfesor}", postProfesorBody);
+            using var response = await Http.PostAsJsonAsync($"{url}{Endpoints.AddProfesor}", postProfesorBody);
 
             if (response.IsSuccessStatusCode)
             {

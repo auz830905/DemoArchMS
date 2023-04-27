@@ -11,6 +11,7 @@
 
 @inject HttpClient Http
 @inject IJSRuntime js
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminclases, admin")]
 
@@ -90,6 +91,8 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
             Http.DefaultRequestHeaders.Accept.Clear();
             Http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             
@@ -99,7 +102,7 @@
             
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.Token);
 
-            clases = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesList}");
+            clases = await Http.GetFromJsonAsync<List<Clase>>($"{url}{Endpoints.ClasesList}");
         }
         catch(Exception)
         {

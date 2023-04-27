@@ -1,19 +1,13 @@
 version: '3'
 
 volumes:
-  ms_clases_data: {}
+  postgres_demo_data: {}
   ms_user_data: {}
-
-networks:
-  ms-net:
-    external: false
 
 services:
   database-users:
     image: mariadb:latest
     container_name: database-users
-    networks:
-      - ms-net
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: ms_users
@@ -24,15 +18,14 @@ services:
     ports:
       - "3306:3306"
 
-  database-clases:
+  database-clases-profesores:
     image: postgres:latest
-    container_name: database-clases   
-    networks:
-      - ms-net
+    container_name: database-clases-profesores   
     ports:
       - "5432:5432"
     volumes:
-      - ms_clases_data:/var/lib/postgresql/data
+      -  postgres_demo_data:/var/lib/postgresql/data
+      - ./create_db_ms-profesores.sql:/docker-entrypoint-initdb.d/create_db_ms-profesores.sql 
     environment:
       POSTGRES_DB: ms_clases
       POSTGRES_USER: admin
@@ -44,13 +37,11 @@ services:
     ports:
       - "5056:80"
       - "7014:443"
-    networks:
-      - ms-net
     restart: always
     depends_on:
-      - database-clases
+      - database-clases-profesores
     environment:
-      ConnectionStrings__host: database-clases
+      ConnectionStrings__host: database-clases-profesores
       ConnectionStrings__port: 5432
       ConnectionStrings__database: ms_clases
       ConnectionStrings__user: admin
@@ -62,8 +53,6 @@ services:
     ports:
       - "5073:80"
       - "7001:443"
-    networks:
-      - ms-net
     restart: always
     depends_on:
       - database-users
@@ -73,14 +62,49 @@ services:
       ConnectionStrings__database: ms_users
       ConnectionStrings__user: admin
       ConnectionStrings__password: admin
-  
-  pgadmin:
-    image: dpage/pgadmin4:4.23
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin     
+    
+  ms-profesores:
+    image: ms-profesores:latest
+    container_name: ms-profesores
     ports:
-      - "8082:80"
-    networks:
-      - ms-net
+      - "5279:80"
+      - "7261:443"
+    restart: always
+    depends_on:
+      - database-clases-profesores
+    environment:
+      ConnectionStrings__host: database-clases-profesores
+      ConnectionStrings__port: 5432
+      ConnectionStrings__database: ms_profesores
+      ConnectionStrings__user: admin
+      ConnectionStrings__password: admin
+    
+  api-gateway:
+    image: api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "5095:80"
+      - "7119:443"
+    restart: always
+    depends_on:
+      - ms-profesores
+      - ms-users
+      - ms-clases
+
+  app-blazor:
+    image: app-blazor:latest
+    container_name: app-blazor
+    ports:
+      - "5050:80"
+      - "7142:443"
+    restart: always
+    depends_on:
+      - api-gateway
+     
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    restart: always
+    ports:
+      - 8081:8080
+

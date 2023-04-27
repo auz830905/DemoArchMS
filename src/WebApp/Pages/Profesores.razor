@@ -14,6 +14,7 @@
 @inject HttpClient Http
 @inject IJSRuntime js
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminprofesores, admin")]
 
@@ -96,6 +97,8 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
             Http.DefaultRequestHeaders.Accept.Clear();
             Http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
            
@@ -105,7 +108,7 @@
             
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.Token);
 
-            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");
+            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{url}{Endpoints.ProfesoresList}");
         }
         catch(Exception)
         {

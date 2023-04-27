@@ -14,8 +14,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30462
+          "Host": "ms-clases",
+          "Port": 80
         }
       ],
       "Key": "clases_by_id",
@@ -31,8 +31,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30462
+          "Host": "ms-clases",
+          "Port": 80
         }
       ],
       "Key": "clases",
@@ -48,8 +48,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30462
+          "Host": "ms-clases",
+          "Port": 80
         }
       ],
       "Key": "clase_by_profesor",
@@ -65,8 +65,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30462
+          "Host": "ms-clases",
+          "Port": 80
         }
       ],
       "Key": "get_clase_not_assign_profesor",
@@ -82,8 +82,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30462
+          "Host": "ms-clases",
+          "Port": 80
         }
       ],
       "Key": "post_clase_profesor",
@@ -99,8 +99,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30463
+          "Host": "ms-profesores",
+          "Port": 80
         }
       ],
       "Key": "profesor_by_id",
@@ -116,8 +116,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30463
+          "Host": "ms-profesores",
+          "Port": 80
         }
       ],
       "Key": "profesores",
@@ -133,8 +133,8 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30464
+          "Host": "ms-user",
+          "Port": 80
         }
       ],
       "Key": "users_login"
@@ -146,14 +146,14 @@
       "DownstreamSCheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "192.168.49.2",
-          "Port": 30464
+          "Host": "ms-user",
+          "Port": 80
         }
       ],
       "Key": "users_register"
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://192.168.49.2:30461"
+    "BaseUrl": "http://localhost:5095"
   }
 }

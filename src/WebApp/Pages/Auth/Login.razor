@@ -10,6 +10,7 @@
 @inject NavigationManager _navManager
 @inject ILoginService service
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 <PageTitle>Autenticar usuario</PageTitle>
 
@@ -47,7 +48,8 @@
     {
         try
         {           
-            using var response = await Http.PostAsJsonAsync($"{Endpoints.UserLogin}", user);
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+            using var response = await Http.PostAsJsonAsync($"{url}{Endpoints.UserLogin}", user);
 
             if (response.IsSuccessStatusCode)
             {

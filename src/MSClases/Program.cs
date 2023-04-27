@@ -49,11 +49,6 @@ builder.Services.AddDbContext<DBContextClases>(options =>
     options.UseNpgsql(connectonString);
 });
 
-//builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextClases>(options =>
-//{
-   //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
-//});
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

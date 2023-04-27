@@ -5,6 +5,7 @@
 @inject HttpClient Http
 @inject NavigationManager _navManager
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminclases, admin")]
 
@@ -29,8 +30,10 @@
     protected async Task DeleteClase()
     {
         try
-        {            
-            using var responseDeleteClase = await Http.DeleteAsync($"{Endpoints.DeleteClase}{clase!.Id}");            
+        {         
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
+            using var responseDeleteClase = await Http.DeleteAsync($"{url}{Endpoints.DeleteClase}{clase!.Id}");            
 
             if (responseDeleteClase.IsSuccessStatusCode)
             {

@@ -35,11 +35,6 @@ builder.Services.AddDbContext<DBContextUsers>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-//builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextUsers>(options =>
-//{
-    //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
-//});
-
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<DBContextUsers>()
     .AddDefaultTokenProviders();

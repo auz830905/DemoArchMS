@@ -5,6 +5,7 @@
 
 @inject HttpClient Http
 @inject IJSRuntime js
+@inject IConfiguration configuration
 
 @attribute [Authorize]
 
@@ -86,7 +87,9 @@
     {
         try
         {
-            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
+            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{url}{Endpoints.ProfesoresList}");
         }
         catch (Exception)
         {
@@ -106,8 +109,9 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
             clases?.Clear();
-            clases = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesByProfesor}{CiSelected}");
+            clases = await Http.GetFromJsonAsync<List<Clase>>($"{url}{Endpoints.ClasesByProfesor}{CiSelected}");
         }
         catch (Exception)
         {

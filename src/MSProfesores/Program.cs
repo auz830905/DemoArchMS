@@ -44,22 +44,18 @@ builder.Services.AddDbContext<DBContextProfesores>(options =>
     var user = Configuration.GetValue<string>("ConnectionStrings:user")!.ToString();
     var password = Configuration.GetValue<string>("ConnectionStrings:password")!.ToString();
 
-    var connectionString = $"server={host}; port={port}; database={database}; user={user}; password={password}; Persist Security Info=False; Connect Timeout=300";
+    var connectonString = $"Host={host}:{port};Database={database}; Username={user};Password={password}";
 
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    options.UseNpgsql(connectonString);
 });
-
-//builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DBContextProfesores>(options =>
-//{
-    //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionSQLServer"));
-//});
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<DBContextProfesores>();
-    //dataContext.Database.Migrate();
+    
+    dataContext.Database.EnsureDeleted();
     dataContext.Database.EnsureCreated();
 }
 

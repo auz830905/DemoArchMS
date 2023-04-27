@@ -10,6 +10,7 @@
 @inject NavigationManager _navManager
 @inject ILoginService service
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 <PageTitle>Registrar usuario</PageTitle>
 
@@ -48,8 +49,9 @@
     private async Task RegisterUser()
     {
         try
-        {           
-            using var response = await Http.PostAsJsonAsync($"{Endpoints.UserRegister}", user);
+        {          
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+            using var response = await Http.PostAsJsonAsync($"{url}{Endpoints.UserRegister}", user);
 
             if (response.IsSuccessStatusCode)
             {

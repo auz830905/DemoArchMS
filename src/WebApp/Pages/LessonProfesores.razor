@@ -12,6 +12,7 @@
 @inject HttpClient Http
 @inject IJSRuntime js
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminclases, admin")]
 
@@ -144,6 +145,8 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
             Http.DefaultRequestHeaders.Accept.Clear();
             Http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             
@@ -153,7 +156,7 @@
             
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token!.Token);
 
-            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{Endpoints.ProfesoresList}");           
+            profesores = await Http.GetFromJsonAsync<List<Profesor>>($"{url}{Endpoints.ProfesoresList}");           
         }
         catch (Exception)
         {
@@ -174,14 +177,16 @@
     {
         try
         {
+            var url = configuration.GetValue<string>("ApiGatewayUrl");
+
             if (clasesTable != null)
                 clasesTable?.Clear();
 
             if (clasesSelect != null)
                 clasesSelect?.Clear();
 
-            clasesSelect = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesNotAssinedProfesor}{CiSelected}/clasesnotassign");
-            clasesTable = await Http.GetFromJsonAsync<List<Clase>>($"{Endpoints.ClasesByProfesor}{CiSelected}");
+            clasesSelect = await Http.GetFromJsonAsync<List<Clase>>($"{url}{Endpoints.ClasesNotAssinedProfesor}{CiSelected}/clasesnotassign");
+            clasesTable = await Http.GetFromJsonAsync<List<Clase>>($"{url}{Endpoints.ClasesByProfesor}{CiSelected}");
         }
         catch (Exception)
         {
@@ -211,8 +216,10 @@
         {
             if (!string.IsNullOrEmpty(CiSelected) && !string.IsNullOrEmpty(IdClaseSelected))
             {
+                var url = configuration.GetValue<string>("ApiGatewayUrl");
+
                 var postClaseProfesorBody = new { Ci = CiSelected, IdClase = IdClaseSelected };            
-                using var response = await Http.PostAsJsonAsync($"{Endpoints.AddClaseProfesor}{CiSelected}/{IdClaseSelected}", postClaseProfesorBody);           
+                using var response = await Http.PostAsJsonAsync($"{url}{Endpoints.AddClaseProfesor}{CiSelected}/{IdClaseSelected}", postClaseProfesorBody);           
                 LoadClasesNotAssign(this.e!);
                 toastService.ShowSuccess("Clase añadida correctamente al profesor");  
             }

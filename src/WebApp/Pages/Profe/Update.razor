@@ -8,6 +8,7 @@
 @inject NavigationManager _navManager
 @inject IJSRuntime js
 @inject IToastService toastService
+@inject IConfiguration configuration
 
 @attribute [Authorize(Roles = "adminprofesores, admin")]
 
@@ -50,7 +51,8 @@
     {
         try
         {
-            var url = $"{Endpoints.UpdateProfesor}";
+            var url = $"{configuration.GetValue<string>("ApiGatewayUrl")}{Endpoints.UpdateProfesor}";
+
             using var response = await Http.PutAsJsonAsync(url, profesor);
 
             if (response.IsSuccessStatusCode)
