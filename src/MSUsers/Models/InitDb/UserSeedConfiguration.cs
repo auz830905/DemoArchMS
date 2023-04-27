@@ -8,7 +8,7 @@ namespace MSUsers.Models.InitDb
     {
         public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
-           builder.HasData(
+           builder.HasData( //Password Qwerty#123
                new IdentityUser
                {
                    Id = "c4302009-0d0d-43e8-b346-481292c36d9f",
